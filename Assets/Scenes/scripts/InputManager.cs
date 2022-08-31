@@ -15,11 +15,12 @@ public class InputManager : MonoBehaviour
 
     new Vector3 CameraRot = Vector3.zero;
     new Vector3 SmoothCameraRot = Vector3.zero;
+    new Vector3 PlayerMovement = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        PlayerMovement = transform.position;
     }
 
     // Update is called once per frame
@@ -58,9 +59,13 @@ public class InputManager : MonoBehaviour
         {
             player.transform.Translate(Vector3.right * playerSpeed * Time.deltaTime);
         }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            player.transform.Translate(Vector3.up * playerSpeed * Time.deltaTime,Space.World);
+        }
 
 
-        
+
 
 
     }

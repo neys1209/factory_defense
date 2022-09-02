@@ -94,6 +94,13 @@ public class InputManager : MonoBehaviour
             DragPosition = Vector3.zero;
             DragEndPosition = Vector3.zero;
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            foreach (GameObject g in SceneData.instance.CurrentUnit)
+            {
+                g.active = !g.active;
+            }
+        }
 
     }
     private void setDragRect(Vector3 point1, Vector3 point2, float y)

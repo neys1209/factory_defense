@@ -5,7 +5,6 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
 
-    public Transform player;
     public Camera playerCamera;
 
     public float cameraRotSpeed = 1;
@@ -13,14 +12,13 @@ public class InputManager : MonoBehaviour
 
 
 
-    new Vector3 CameraRot = Vector3.zero;
-    new Vector3 SmoothCameraRot = Vector3.zero;
-    new Vector3 PlayerMovement = Vector3.zero;
+    Vector3 CameraRot = Vector3.zero;
+    Vector3 SmoothCameraRot = Vector3.zero;
+    Vector3 PlayerMovement = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerMovement = transform.position;
     }
 
     // Update is called once per frame
@@ -39,34 +37,19 @@ public class InputManager : MonoBehaviour
                 CameraRot.x += -Input.GetAxis("Mouse Y") * cameraRotSpeed;
             }
         }
-        SmoothCameraRot = Vector3.Slerp(SmoothCameraRot, CameraRot, Time.deltaTime * 10);
-        player.transform.rotation = Quaternion.Euler(SmoothCameraRot);
+        SmoothCameraRot = Vector3.Slerp(SmoothCameraRot, CameraRot, Time.deltaTime * 10.0f);
+        transform.rotation = Quaternion.Euler(SmoothCameraRot);
 
         
-        if (Input.GetKey(KeyCode.W))
+        if (  Input.GetAxis("Horizontal") != 0.0f)
         {
-            player.transform.Translate(Vector3.forward * playerSpeed * Time.deltaTime);
+            transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetAxis("Vertical") != 0.0f)
         {
-            player.transform.Translate(Vector3.forward * -playerSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            player.transform.Translate(Vector3.left * playerSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            player.transform.Translate(Vector3.right * playerSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            player.transform.Translate(Vector3.up * playerSpeed * Time.deltaTime,Space.World);
+            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime);
         }
 
-
-
-
-
+        
     }
 }

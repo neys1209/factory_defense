@@ -5,45 +5,11 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
 
-    public enum UNITTYPE { Air, Ground }
-    public UNITTYPE type = UNITTYPE.Air;
+    public enum UNITTYPE { AIR, GROUND }
+    public UNITTYPE type = UNITTYPE.AIR;
 
-    enum STATE { Create, Attack, Build, Move }
+    enum STATE { CREATE, ATTACK, BUILD }
     
-    STATE state = STATE.Create;
-
-    void ChangeState(STATE s)
-    {
-        if (state == s) return;
-        state = s;
-        switch (state)
-        { 
-            case STATE.Create:
-                break;
-            case STATE.Attack:
-                break;
-            case STATE.Build:
-                break;
-            case STATE.Move:
-                break;
-        }
-    }
-
-    void StateProcess()
-    {
-        switch (state)
-        {
-            case STATE.Create:
-                break;
-            case STATE.Attack:
-                break;
-            case STATE.Build:
-                break;
-            case STATE.Move:
-
-                break;
-        }
-    }
 
     // Start is called before the first frame update
     void Start()

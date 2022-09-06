@@ -5,57 +5,64 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
 
-    public enum UNITTYPE { Air, Ground }
-    public UNITTYPE type = UNITTYPE.Air;
+    protected UNITTYPE type = UNITTYPE.Air;
+    public UnitStat stat;
 
-    enum STATE { Create, Attack, Build, Move }
-    
-    STATE state = STATE.Create;
+    UNITSTATE state = UNITSTATE.Create;
 
-    void ChangeState(STATE s)
+    Coroutine coMove = null;
+
+    protected void ChangeState(UNITSTATE s)
     {
         if (state == s) return;
         state = s;
         switch (state)
-        { 
-            case STATE.Create:
+        {
+            case UNITSTATE.Create:
                 break;
-            case STATE.Attack:
+            case UNITSTATE.Attack:
                 break;
-            case STATE.Build:
-                break;
-            case STATE.Move:
+            case UNITSTATE.Build:
                 break;
         }
     }
 
-    void StateProcess()
+    protected void StateProcess()
     {
         switch (state)
         {
-            case STATE.Create:
+            case UNITSTATE.Create:
                 break;
-            case STATE.Attack:
+            case UNITSTATE.Attack:
                 break;
-            case STATE.Build:
-                break;
-            case STATE.Move:
-
+            case UNITSTATE.Build:
                 break;
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+
+    protected IEnumerator MoveToTarget(Vector3 target)
     {
-        
+        yield return null;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected IEnumerator MoveToMovingTarget()
     {
-
+        yield return null;
     }
 
+    protected bool isMoveing()
+    {
+        return (coMove != null);
+    }
+
+    protected void SetUnitType(UNITTYPE t)
+    {
+        type = t;
+    }
+    protected UNITTYPE GetUnitType()
+    {
+        return type;
+    }
     
 }

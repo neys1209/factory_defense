@@ -44,14 +44,15 @@ public class InputManager : MonoBehaviour
         SmoothCameraRot = Vector3.Slerp(SmoothCameraRot, CameraRot, Time.deltaTime * 10.0f);
         transform.rotation = Quaternion.Euler(SmoothCameraRot);
 
-        
+
+        float delta = playerSpeed * Time.deltaTime;
         if (  Input.GetAxis("Horizontal") != 0.0f)
         {
-            transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * playerSpeed * Time.deltaTime);
+            transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * delta);
         }
         if (Input.GetAxis("Vertical") != 0.0f)
         {
-            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * playerSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * Input.GetAxis("Vertical") * delta);
         }
         playerMovement.x = transform.position.x;
         playerMovement.z = transform.position.z;
@@ -98,7 +99,7 @@ public class InputManager : MonoBehaviour
         {
             foreach (GameObject g in SceneData.instance.CurrentUnit)
             {
-                g.active = !g.active;
+                g.active = !(g.active);
             }
         }
 
@@ -137,6 +138,7 @@ public class InputManager : MonoBehaviour
                 if (rect.Contains(point))
                 {
                     SceneData.instance.CurrentUnit.Add(units[i]);
+                    units[i].GetComponent<AirUnit>().StartMoveToTarget(transform.position);
                 }
             }
         }        

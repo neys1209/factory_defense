@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
 
     public void OnFire()
     {
-        isFire = true
+        isFire = true;
         //transform.parent  = null;
         transform.SetParent(null);
         GetComponent<Rigidbody>().isKinematic = false;

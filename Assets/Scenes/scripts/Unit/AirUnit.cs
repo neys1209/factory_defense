@@ -39,7 +39,7 @@ public class AirUnit : Unit
 
         while (dist > 0)
         {
-            float delta = Time.deltaTime * stat.MoveSpeed;
+            float delta = Time.deltaTime * 3;
             if (dist < delta) delta = dist;
             smoothMove = Vector3.Lerp(smoothMove, dir * delta,Time.deltaTime*10);
             transform.Translate(smoothMove);

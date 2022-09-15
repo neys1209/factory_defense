@@ -20,8 +20,8 @@ public class InputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lineRanderer = dragLine.GetComponent<LineRenderer>();
         playerMovement = transform.position;
+        lineRanderer = dragLine.GetComponent<LineRenderer>();
         lineRanderer = dragLine.GetComponent<LineRenderer>();
     }
 

@@ -17,7 +17,7 @@ public class Ground : MonoBehaviour
     {
        
          //   IsBuildTower = true;
-            Debug.Log("Ground true");
+         //   Debug.Log("Ground true");
         
     }
 
@@ -31,7 +31,7 @@ public class Ground : MonoBehaviour
 
       
            // IsBuildTower = false;
-            Debug.Log("Ground false");
+           // Debug.Log("Ground false");
         
 
     }

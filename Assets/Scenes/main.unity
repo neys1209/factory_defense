@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13057,14 +13057,11 @@ MonoBehaviour:
   towerTemplate:
   - {fileID: 11400000, guid: 14924b2343fb2cd4490284848c810c0b, type: 2}
   - {fileID: 11400000, guid: d40a2965e289b8e40ba616e4eaa0a3bc, type: 2}
-  towerPrefab: {fileID: 6452381602018093633, guid: 3b2f9d0e58bf0844f8efe1156267ff4b, type: 3}
   layermask:
     serializedVersion: 2
     m_Bits: 192
   removePress: {fileID: 1540294419}
   towerDataViewer: {fileID: 632013049}
-  gridRine: {fileID: 0}
-  follwTowerClone: {fileID: 6452381602018093633, guid: da7c8fe42381b074ab9216170e105bcf, type: 3}
   tiles:
   - {fileID: 786312141}
   - {fileID: 1508255866}
@@ -20882,7 +20879,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e902fd6c5acad7441a4be67a2479e7dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c218982c84f3e74a842f0f463e51b27, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -35184,7 +35181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e902fd6c5acad7441a4be67a2479e7dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c218982c84f3e74a842f0f463e51b27, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -54891,7 +54888,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f3ff14534d5f6b14880232d5b83be3d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7ab31380a0eb8e74fa4f564007ebaa76, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -59566,7 +59563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e452569deeea61144b4fbb93c5d9a416, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dcfb072b074b3514abfe35b72f5a436d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89884,7 +89881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e902fd6c5acad7441a4be67a2479e7dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c218982c84f3e74a842f0f463e51b27, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -94598,7 +94595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f84028cd870161f4886ade60e519c79d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1feb5a25aa603d458ea575bd608d451, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

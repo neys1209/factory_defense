@@ -16,17 +16,17 @@ public class UiClick : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-
+        Image.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-       // Image.SetActive(false);
+        Image.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //Image.SetActive(true);
+        
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -36,14 +36,14 @@ public class UiClick : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
 
     public void OnPointerClick(PointerEventData eventData )
     {      
-       
+       /*
         if (eventData.button == PointerEventData.InputButton.Left)
         {             
             Change = !Change;
             Image.SetActive(Change);
             Debug.Log(Change);
         }
-       
+       */
     }
 
        

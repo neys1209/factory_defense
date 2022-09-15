@@ -36,15 +36,15 @@ public class Tower : MonoBehaviour
 
                 if (gridPosition == pos)
                 {
-                     Debug.Log(gridPosition);
-                     Debug.Log(pos);
+                  //   Debug.Log(gridPosition);
+                  //   Debug.Log(pos);
                     tilee.IsBuildTower = false;
                 }
             }
         }
        // ownerTile.IsBuildTower = false;
-         Destroy(transform.parent.gameObject); // Create Empty 로 만든거를 Empty까지 삭제하기
-         // Destroy(gameObject);
+      //   Destroy(transform.parent.gameObject); // Create Empty 로 만든거를 Empty까지 삭제하기
+          Destroy(gameObject);
     }
     private void Awake()
     {

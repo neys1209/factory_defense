@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de31964e261154448694f2127bdf75b, type: 3}
   m_Name: Tower01
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 1890995737637190, guid: 7fff597b24905104cb41a18ec9bed169, type: 3}
-  followTowerPrefab: {fileID: 1890995737637190, guid: 7fff597b24905104cb41a18ec9bed169, type: 3}
+  towerPrefab: {fileID: 1085313915532982, guid: 21a7a1d11f7627745ab50590ea97a563, type: 3}
+  followTowerPrefab: {fileID: 1023125089886998, guid: 1ccb2bcbcc40ffb49b9c7e2cbda0e43e, type: 3}
   width: 1
   height: 1

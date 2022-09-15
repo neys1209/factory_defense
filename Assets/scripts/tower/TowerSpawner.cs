@@ -12,22 +12,19 @@ public class TowerSpawner : MonoBehaviour
 
     [SerializeField]
     private TowerTemplate[] towerTemplate;   //타워 정보
-    [SerializeField]
-    private GameObject towerPrefab;
-
+    
     public LayerMask layermask;
     public GameObject removePress;
 
     [SerializeField]
     private TowerDataViewer towerDataViewer;
 
-    public GameObject gridRine;
-
+    
     private bool isOnTowerButton = false;
 
     private bool reMove;
 
-    [SerializeField]
+    
     private GameObject follwTowerClone = null;
 
     private int towerType;
@@ -103,7 +100,7 @@ public class TowerSpawner : MonoBehaviour
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        gridPositionList = towerTemplate[towerType].GetGridPositionList(new Vector3Int(x, y, z), dir);
+                        gridPositionList = towerTemplate[towerType].GetGridPositionList(new Vector3Int(x, y-1, z), dir);
 
                         bool canBuild = true;
                         foreach (Vector3Int gridPositionn in gridPositionList)

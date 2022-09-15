@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 33797267348003516}
   - component: {fileID: 23259559270594064}
   - component: {fileID: -1042490823796223113}
+  - component: {fileID: -7233589792255213454}
   m_Layer: 0
   m_Name: House_1_Green
-  m_TagString: Tower
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2661389, y: 1.2223315, z: 1.0526284}
   m_Center: {x: 0.000000059604645, y: 0.60931635, z: 0.000000059604645}
+--- !u!114 &-7233589792255213454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886127568255648}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e363c99f12610d54ab80c1e2ebdd803a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  towerBuild: 0

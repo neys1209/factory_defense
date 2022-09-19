@@ -8,7 +8,9 @@ public class InputManager : MonoBehaviour
     LineRenderer lineRanderer;
 
     public float cameraRotSpeed = 1;
+    public float cameraZoomSpeed = 5;
     public float playerSpeed = 5;
+    
 
     Vector3 CameraRot = Vector3.zero;
     Vector3 SmoothCameraRot = Vector3.zero;
@@ -16,6 +18,11 @@ public class InputManager : MonoBehaviour
     Vector3 DragPosition = Vector3.zero;
     Vector3 DragEndPosition = Vector3.zero;
     Vector3[] DragRect = new Vector3[4];
+
+    float cameraZoom = 0;
+    float smoothCameraZoom = 0;
+    Vector3 cameraOffset = Vector3.zero;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +35,7 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //player movement
+        //camera rotate
         if (Input.GetMouseButton(1))
         {
             if (Input.GetAxis("Mouse X") != Mathf.Epsilon)
@@ -44,7 +51,17 @@ public class InputManager : MonoBehaviour
         SmoothCameraRot = Vector3.Slerp(SmoothCameraRot, CameraRot, Time.deltaTime * 10.0f);
         transform.rotation = Quaternion.Euler(SmoothCameraRot);
 
+        //camera zoom
+        if (Input.GetAxis("Mouse ScrollWheel") != Mathf.Epsilon)
+        {
+            cameraZoom += Input.GetAxis("Mouse ScrollWheel") * cameraZoomSpeed;
+            cameraZoom = Mathf.Clamp(cameraZoom, 0, 50);
+        }
+        
+        cameraOffset.z = Mathf.Lerp(cameraOffset.z, cameraZoom,Time.deltaTime * 10);
+        SceneData.instance.camera.transform.localPosition = cameraOffset;
 
+        //player movement
         float delta = playerSpeed * Time.deltaTime;
         if (  Input.GetAxis("Horizontal") != 0.0f)
         {
@@ -120,7 +137,7 @@ public class InputManager : MonoBehaviour
     void SetCurrentUnit()
     {
         SceneData.instance.CurrentUnit.Clear();
-        List<GameObject> units = SceneData.instance.unitManager.UnitList;
+        List<GameObject> units = UnitManager.instance.UnitList;
         Rect rect = new Rect(
             DragPosition.x < DragEndPosition.x? DragPosition.x : DragEndPosition.x,
             DragPosition.z < DragEndPosition.z ? DragPosition.z : DragEndPosition.z,
@@ -138,7 +155,7 @@ public class InputManager : MonoBehaviour
                 if (rect.Contains(point))
                 {
                     SceneData.instance.CurrentUnit.Add(units[i]);
-                    //units[i].GetComponent<AirUnit>().StartMoveToTarget(transform.position);
+                    units[i].GetComponent<AirUnit>().StartMoveToTarget(transform.position);
                 }
             }
         }        

@@ -155,7 +155,7 @@ public class InputManager : MonoBehaviour
                 if (rect.Contains(point))
                 {
                     SceneData.instance.CurrentUnit.Add(units[i]);
-                    units[i].GetComponent<AirUnit>().StartMoveToTarget(transform.position);
+                    units[i].GetComponent<AirUnit>().StartMoveToTarget(transform.position,3);
                 }
             }
         }        

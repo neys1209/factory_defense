@@ -25,7 +25,7 @@ public class AirUnit : Unit
         
     }
 
-    public void StartMoveToTarget(Vector3 target)
+    public void StartMoveToTarget(Vector3 target,float radius)
     {
         if (coMove != null)
         {
@@ -35,11 +35,11 @@ public class AirUnit : Unit
         {
             StopCoroutine(coRot);
         }
-        coMove =  StartCoroutine(MoveToPosition(target));
+        coMove =  StartCoroutine(MoveToPosition(target,radius));
         coRot = StartCoroutine(RotateToTarget(target));
     }
 
-    IEnumerator MoveToPosition(Vector3 target)
+    IEnumerator MoveToPosition(Vector3 target,float radius = 0)
     {
         
         target.y = transform.position.y;
@@ -47,7 +47,7 @@ public class AirUnit : Unit
         float dist = dir.magnitude;
         dir.Normalize();
 
-        while (dist > 0)
+        while (dist > radius)
         {
             float delta = Time.deltaTime * myInfo.MoveSpeed;
             if (dist < delta) delta = dist;
@@ -61,7 +61,7 @@ public class AirUnit : Unit
     {
         Vector3 dir = target - transform.position;
         dir.Normalize();
-        float angle = Mathf.Acos(Vector3.Dot(dir,Vector3.forward)) * Mathf.Deg2Rad;
+        float angle = Mathf.Acos(Vector3.Dot(dir,transform.forward)) * Mathf.Rad2Deg;
         float rotDir = Vector3.Dot(dir, transform.right) < 0.0f ? -1.0f : 1.0f;
 
         while (angle > Mathf.Epsilon)
@@ -73,8 +73,4 @@ public class AirUnit : Unit
             yield return null;
         }
     }
-
-    
-    
-
 }

@@ -5,15 +5,10 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour
 {
     public List<GameObject> UnitList = new List<GameObject>();
+    public static UnitManager instance;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        instance = this;
     }
 }

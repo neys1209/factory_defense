@@ -8,7 +8,9 @@ public class InputManager : MonoBehaviour
     LineRenderer lineRanderer;
 
     public float cameraRotSpeed = 1;
+    public float cameraZoomSpeed = 5;
     public float playerSpeed = 5;
+    
 
     Vector3 CameraRot = Vector3.zero;
     Vector3 SmoothCameraRot = Vector3.zero;
@@ -17,18 +19,23 @@ public class InputManager : MonoBehaviour
     Vector3 DragEndPosition = Vector3.zero;
     Vector3[] DragRect = new Vector3[4];
 
+    float cameraZoom = 0;
+    float smoothCameraZoom = 0;
+    Vector3 cameraOffset = Vector3.zero;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        lineRanderer = dragLine.GetComponent<LineRenderer>();
         playerMovement = transform.position;
+        lineRanderer = dragLine.GetComponent<LineRenderer>();
         lineRanderer = dragLine.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //player movement
+        //camera rotate
         if (Input.GetMouseButton(1))
         {
             if (Input.GetAxis("Mouse X") != Mathf.Epsilon)
@@ -44,7 +51,17 @@ public class InputManager : MonoBehaviour
         SmoothCameraRot = Vector3.Slerp(SmoothCameraRot, CameraRot, Time.deltaTime * 10.0f);
         transform.rotation = Quaternion.Euler(SmoothCameraRot);
 
+        //camera zoom
+        if (Input.GetAxis("Mouse ScrollWheel") != Mathf.Epsilon)
+        {
+            cameraZoom += Input.GetAxis("Mouse ScrollWheel") * cameraZoomSpeed;
+            cameraZoom = Mathf.Clamp(cameraZoom, 0, 50);
+        }
+        
+        cameraOffset.z = Mathf.Lerp(cameraOffset.z, cameraZoom,Time.deltaTime * 10);
+        Camera.main.transform.localPosition = cameraOffset;
 
+        //player movement
         float delta = playerSpeed * Time.deltaTime;
         if (  Input.GetAxis("Horizontal") != 0.0f)
         {
@@ -63,18 +80,30 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(SceneData.instance.camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
                 {
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
                         dragLine.SetActive(true);
                         DragPosition = hit.point;
                     }
+                    else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Unit"))
+                    {
+                        if (SceneData.instance.CurrentUnit.Contains(hit.transform.gameObject))
+                        {
+                            SceneData.instance.CurrentUnit.Remove(hit.transform.gameObject);
+                        }
+                        else
+                        {
+                            SceneData.instance.CurrentUnit.Add(hit.transform.gameObject);
+                        }
+                        
+                    }
                 }
             }
             if (DragPosition != Vector3.zero && Input.GetMouseButton(0))
             {
-                if (Physics.Raycast(SceneData.instance.camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
                 {
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
@@ -99,9 +128,13 @@ public class InputManager : MonoBehaviour
         {
             foreach (GameObject g in SceneData.instance.CurrentUnit)
             {
-                g.active = !(g.active);
+                if (g.GetComponent<Unit>().type == Unit.UNITTYPE.AIR)
+                    g.GetComponent<AirUnit>().StartMoveToTarget(transform.position, 3);
+                else
+                    g.GetComponent<GroundUnit>().StartMoveToTarget(transform.position, 3);
             }
         }
+
 
     }
     private void setDragRect(Vector3 point1, Vector3 point2, float y)
@@ -120,7 +153,7 @@ public class InputManager : MonoBehaviour
     void SetCurrentUnit()
     {
         SceneData.instance.CurrentUnit.Clear();
-        List<GameObject> units = SceneData.instance.unitManager.UnitList;
+        List<GameObject> units = UnitManager.instance.UnitList;
         Rect rect = new Rect(
             DragPosition.x < DragEndPosition.x? DragPosition.x : DragEndPosition.x,
             DragPosition.z < DragEndPosition.z ? DragPosition.z : DragEndPosition.z,
@@ -138,7 +171,7 @@ public class InputManager : MonoBehaviour
                 if (rect.Contains(point))
                 {
                     SceneData.instance.CurrentUnit.Add(units[i]);
-                    //units[i].GetComponent<AirUnit>().StartMoveToTarget(transform.position);
+                    
                 }
             }
         }        

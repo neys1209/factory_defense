@@ -6,7 +6,6 @@ public class SceneData : MonoBehaviour
 {
 
     public GameObject player;
-    public Camera camera;
     public List<GameObject> CurrentUnit = new List<GameObject>();
 
     public static SceneData instance;

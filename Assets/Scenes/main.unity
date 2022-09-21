@@ -62689,6 +62689,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 55237821}
     m_Modifications:
+    - target: {fileID: 1436680128321317723, guid: 372e3e0a61ad1424b92e0be170cb02ff, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5619579499487079787, guid: 372e3e0a61ad1424b92e0be170cb02ff, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -62733,9 +62737,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7737046619416879586, guid: 372e3e0a61ad1424b92e0be170cb02ff, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8115956523196530620, guid: 372e3e0a61ad1424b92e0be170cb02ff, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8416767185718593697, guid: 372e3e0a61ad1424b92e0be170cb02ff, type: 3}
       propertyPath: m_Name
       value: GroundUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416767185718593697, guid: 372e3e0a61ad1424b92e0be170cb02ff, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372e3e0a61ad1424b92e0be170cb02ff, type: 3}
@@ -69006,6 +69022,28 @@ MonoBehaviour:
     atkSpeed: 0
     moveSpeed: 3
     rotateSpeed: 90
+--- !u!195 &1091999434
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091999431}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1092505118 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3459918964422612872, guid: 48744582fc6d9604faf9d852fa1be461, type: 3}
@@ -72953,11 +72991,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBuildTower: 0
---- !u!20 &1174174900 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3161191018664652688, guid: f0016899d5aa17749bfc13be2f6c3c88, type: 3}
-  m_PrefabInstance: {fileID: 724079482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1174973018 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3459918963624229198, guid: 48744582fc6d9604faf9d852fa1be461, type: 3}
@@ -109585,7 +109618,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 40770264}
-  camera: {fileID: 1174174900}
   CurrentUnit: []
 --- !u!4 &1947694791
 Transform:

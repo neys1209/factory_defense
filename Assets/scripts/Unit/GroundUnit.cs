@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GroundUnit : Unit
 {
     Coroutine coMove = null;
     Coroutine coRot = null;
-
     public UnitStat myInfo;
+
+    NavMeshAgent myNav;
 
     // Start is called before the first frame update
     void Start()
     {
         UnitManager.instance.UnitList.Add(gameObject);
-
+        myNav = gameObject.GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -39,19 +41,7 @@ public class GroundUnit : Unit
     IEnumerator MoveToPosition(Vector3 target, float radius = 0)
     {
 
-        target.y = transform.position.y;
-        Vector3 dir = target - transform.position;
-        float dist = dir.magnitude;
-        dir.Normalize();
-
-        while (dist > radius)
-        {
-            float delta = Time.deltaTime * myInfo.MoveSpeed;
-            if (dist < delta) delta = dist;
-            transform.Translate(dir * delta, Space.World);
-            dist -= delta;
-            yield return null;
-        }
+        yield return null;
     }
 
     IEnumerator RotateToTarget(Vector3 target)

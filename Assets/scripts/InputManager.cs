@@ -59,7 +59,7 @@ public class InputManager : MonoBehaviour
         }
         
         cameraOffset.z = Mathf.Lerp(cameraOffset.z, cameraZoom,Time.deltaTime * 10);
-        SceneData.instance.camera.transform.localPosition = cameraOffset;
+        Camera.main.transform.localPosition = cameraOffset;
 
         //player movement
         float delta = playerSpeed * Time.deltaTime;
@@ -80,18 +80,30 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(SceneData.instance.camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
                 {
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
                         dragLine.SetActive(true);
                         DragPosition = hit.point;
                     }
+                    else if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Unit"))
+                    {
+                        if (SceneData.instance.CurrentUnit.Contains(hit.transform.gameObject))
+                        {
+                            SceneData.instance.CurrentUnit.Remove(hit.transform.gameObject);
+                        }
+                        else
+                        {
+                            SceneData.instance.CurrentUnit.Add(hit.transform.gameObject);
+                        }
+                        
+                    }
                 }
             }
             if (DragPosition != Vector3.zero && Input.GetMouseButton(0))
             {
-                if (Physics.Raycast(SceneData.instance.camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
                 {
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Ground"))
                     {
@@ -116,9 +128,13 @@ public class InputManager : MonoBehaviour
         {
             foreach (GameObject g in SceneData.instance.CurrentUnit)
             {
-                g.active = !(g.active);
+                if (g.GetComponent<Unit>().type == Unit.UNITTYPE.AIR)
+                    g.GetComponent<AirUnit>().StartMoveToTarget(transform.position, 3);
+                else
+                    g.GetComponent<GroundUnit>().StartMoveToTarget(transform.position, 3);
             }
         }
+
 
     }
     private void setDragRect(Vector3 point1, Vector3 point2, float y)
@@ -155,7 +171,7 @@ public class InputManager : MonoBehaviour
                 if (rect.Contains(point))
                 {
                     SceneData.instance.CurrentUnit.Add(units[i]);
-                    units[i].GetComponent<AirUnit>().StartMoveToTarget(transform.position,3);
+                    
                 }
             }
         }        

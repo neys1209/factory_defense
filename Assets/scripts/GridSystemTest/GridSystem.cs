@@ -55,6 +55,7 @@ public class GridSystem : MonoBehaviour
                     }
 
                     preview.transform.position = GetBlockPosition(WorldPostion2MapPosition(hit.point), block.CellSize);
+                    preview.transform.Translate(Vector3.up * 0.2f);
                     preview.SetActive(true);
 
                 }
@@ -114,6 +115,7 @@ public class GridSystem : MonoBehaviour
         }
         GameObject obj = Instantiate(prefab);
         obj.transform.position = GetBlockPosition(pos,objCellSize);
+        obj.transform.parent = transform;
 
         for (int x = 0; x < objCellSize.x; x++)
         {

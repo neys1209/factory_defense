@@ -20,9 +20,10 @@ public class InputManager : MonoBehaviour
     Vector3[] DragRect = new Vector3[4];
 
     float cameraZoom = 0;
-    float smoothCameraZoom = 0;
+    //float smoothCameraZoom = 0;
     Vector3 cameraOffset = Vector3.zero;
-    
+
+    bool SetUnitMoveTarget = false;
 
     // Start is called before the first frame update
     void Start()

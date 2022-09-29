@@ -6,8 +6,8 @@ public class GridSystem : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public const int MapWidth = 50;
-    public const int MapHeight = 50;
+    public const int MapWidth = 16;
+    public const int MapHeight = 16;
     
     public static Cell[,] MapData = new Cell[MapWidth,MapHeight];
 
@@ -17,8 +17,11 @@ public class GridSystem : MonoBehaviour
     GameObject preview;
     public Material previewMaterial;
 
+    public static GridSystem Inst;
+
     private void Awake()
     {
+        Inst = this;
         for (int x = 0; x < MapWidth; x++)
         {
             for (int y = 0; y < MapHeight; y++)
@@ -27,7 +30,7 @@ public class GridSystem : MonoBehaviour
                 MapData[x, y].GridSpacePostion = new Vector2(x, y);
             }
         }
-        CellSize = new Vector2(MapWidth / transform.lossyScale.x, MapHeight / transform.lossyScale.z);
+        CellSize = new Vector2(transform.lossyScale.x / MapWidth, transform.lossyScale.z / MapHeight);
     }
     void Start()
     {

@@ -9,5 +9,4 @@ public class Unit : MonoBehaviour
     public UNITTYPE type = UNITTYPE.AIR;
 
     enum STATE { CREATE, ATTACK, BUILD }
-        
 }

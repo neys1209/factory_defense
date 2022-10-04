@@ -11,5 +11,8 @@ public class Blocks : MonoBehaviour
     private void Awake()
     {
         Inst = this;
+
     }
+
+    
 }

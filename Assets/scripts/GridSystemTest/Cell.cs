@@ -9,13 +9,13 @@ public class Cell
 
     public Vector2 GridSpacePostion = new Vector2();
     public bool isEmpty = true;
-    public int dataID = -1;
     GameObject data;
+    
     public void SetData(GameObject obj)
     {
         data = obj;
-        dataID = obj.GetInstanceID();
         isEmpty = false;
+        GridSystem.ActivatedCell.Add(((int)GridSpacePostion.x, (int)GridSpacePostion.y));
     }
 
     public GameObject GetData()
@@ -28,6 +28,7 @@ public class Cell
         if (data == null)
         {
             isEmpty = true;
+            GridSystem.ActivatedCell.Remove(((int)GridSpacePostion.x, (int)GridSpacePostion.y));
         }
     }
 }

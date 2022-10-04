@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 [System.Serializable]
 public class datafile
 {
     public Cell[] mapData;
-    public Vector2 mapSize;
-    public Vector2 cellSize;
+    
+
     public List<GameObject> blockList;
 }
 
@@ -25,24 +26,34 @@ public class MapSaveAndLoad : MonoBehaviour
 
     public void Save()
     {
-        datafile data = new datafile();
-        data.mapData = twodim2onedim(GridSystem.MapData);
-        data.mapSize = new Vector2(GridSystem.MapWidth, GridSystem.MapHeight);
-        data.cellSize = GridSystem.CellSize;
-        data.blockList = Blocks.Inst.BlockList;
 
+        datafile SaveData = new datafile();
+        SaveData.mapData = ChoiceSaveCell();
+        //SaveData.mapSize = new Vector2(GridSystem.MapWidth, GridSystem.MapHeight);
+        //SaveData.cellSize = new Vector2(GridSystem.CellSize.x, GridSystem.CellSize.y);
+        string fliePath = Application.dataPath + "/Data/Maps";
 
-
-        string fileName = $"{Random.value}";
-        string path = Path.Combine(Application.dataPath + "/Data/Maps/" + fileName + "save.Json");
-        string file = JsonUtility.ToJson(data);
-        Debug.Log(file);
-        File.WriteAllText(path, file);
+        FileStream fs = new  FileStream(fliePath+"/Savefile.Save",FileMode.Create);
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(fs, SaveData);
+        fs.Close();
     }
 
     public void Load()
     {
-        new GameObject().GetInstanceID();
+        
+    }
+
+    Cell[] ChoiceSaveCell()
+    {
+        Cell[] retArray = new Cell[GridSystem.ActivatedCell.Count];
+        for (int i = 0; i < retArray.Length; i++)
+        {
+            (int x, int y) Index = GridSystem.ActivatedCell[i];
+            retArray[i] = GridSystem.MapData[Index.x, Index.y];
+        }
+        return retArray;
+        
     }
 
     T[] twodim2onedim<T>(T[,] array)
@@ -60,5 +71,4 @@ public class MapSaveAndLoad : MonoBehaviour
         }
         return retArray;
     }
-    
 }

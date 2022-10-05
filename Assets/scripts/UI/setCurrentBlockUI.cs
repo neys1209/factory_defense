@@ -19,6 +19,8 @@ public class setCurrentBlockUI: MonoBehaviour
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localScale = obj.transform.localScale * 6;
         obj.layer = LayerMask.NameToLayer("UI");
+        if (obj.transform.childCount > 0)
+            obj.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("UI");
     }
 
     // Update is called once per frame

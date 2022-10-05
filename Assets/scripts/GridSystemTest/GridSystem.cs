@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GridSystem : MonoBehaviour
 {
+    #region 변수
     public const int MapWidth = 30;
     public const int MapHeight = 30;
     
@@ -19,7 +20,7 @@ public class GridSystem : MonoBehaviour
     public GameObject CellViewer;
     bool previewSetOffset = false;
     public static GridSystem Inst;
-
+    #endregion
     private void Awake()
     {
         Inst = this;
@@ -57,8 +58,13 @@ public class GridSystem : MonoBehaviour
                     {
                         PlaceBlock(block.gameObject, hit.point, block.CellSize);
                     }
+                    else if (Input.GetMouseButton(1) && !getCellData(hitPos.x, hitPos.y).isEmpty)
+                    {
+                        GameObject deliteCellData = getCellData(hitPos.x, hitPos.y).GetData();
+                        DeltiteCellData(deliteCellData,hitPos,deliteCellData.GetComponent<Block>().CellSize);
+                    }
 
-                    if (WorldPostion2MapPosition(preview.transform.position) != WorldPostion2MapPosition(hit.point))
+                    if ((int)Vector3.Distance(Vector3.zero, preview.transform.position) != (int)Vector3.Distance(Vector3.zero,GetBlockPosition(WorldPostion2MapPosition(hit.point), block.CellSize)))
                     {
                         preview.transform.position = GetBlockPosition(WorldPostion2MapPosition(hit.point), block.CellSize);
                         preview.transform.Translate(Vector3.up * 0.1f);
@@ -68,22 +74,13 @@ public class GridSystem : MonoBehaviour
                     {
                         if (previewSetOffset)
                         {
+                            Debug.Log("d");
                             previewSetOffset = false;
                             StartCoroutine(ViewGridCell(WorldPostion2MapPosition(hit.point), block.CellSize));
                         }
                     }
                     preview.SetActive(true);
 
-                }
-                else if (getCellData(hitPos.x, hitPos.y) != null)
-                {
-                    if (Input.GetMouseButton(1))
-                    {
-                        
-                        DeltiteCellData(getCellData(hitPos.x, hitPos.y).GetData(),
-                            hitPos,
-                            getCellData(hitPos.x, hitPos.y).GetData().GetComponent<Block>().CellSize);
-                    }
                 }
             }
         }
@@ -101,7 +98,7 @@ public class GridSystem : MonoBehaviour
 
     }
 
-
+    #region 좌표계변환 함수들
     public Vector2 WorldPostion2MapPosition(Vector3 Wp)
     {
         //월드의 좌표를 그리드상의 좌표로 변환합니다
@@ -130,7 +127,9 @@ public class GridSystem : MonoBehaviour
 
         return new Vector3(x, 1, y);
     }
+    #endregion
 
+    #region 블럭 놓기 관련 함수들
     public void PlaceBlock(GameObject prefab,Vector3 position,Vector2 objCellSize)
     {
         //그리드상에 블럭을 놓는 함수입니다
@@ -153,7 +152,6 @@ public class GridSystem : MonoBehaviour
         }
         obj.SetActive(true);
     }
-
     public Vector3 GetBlockPosition(Vector2 MapPos,Vector2 objCellSize)
     {
         //블럭을 놓을 때 여러칸을 차지하는 블럭의 위치를 가운데로 조정하는 함수입니다
@@ -165,13 +163,16 @@ public class GridSystem : MonoBehaviour
         if (preview != null) Destroy(preview);
         if (obj == null) return;
         preview = Instantiate(obj);
-        Material[] materials = preview.GetComponent<MeshRenderer>().materials;
+        Material[] materials = preview.GetComponentInChildren<MeshRenderer>().materials;
         materials[0] = previewMaterial;
-        preview.GetComponent<MeshRenderer>().materials = materials;
-        preview.GetComponent<Collider>().isTrigger = true;
-        preview.GetComponent<Rigidbody>().isKinematic = true;
+        preview.GetComponentInChildren<MeshRenderer>().materials = materials;
+        preview.GetComponentInChildren<Collider>().isTrigger = true;
+        preview.GetComponentInChildren<Rigidbody>().isKinematic = true;
     }
 
+    #endregion
+
+    #region 기타 계산/편의 함수
     public Cell getCellData(int x, int y)
     {
         //인덱스(그리드 좌표)를 통해 그 좌표의 셀 데이터를 얻어옵니다
@@ -196,7 +197,6 @@ public class GridSystem : MonoBehaviour
         }
         return null;
     }
-
     public void DeltiteCellData(GameObject obj,Vector2 index, Vector2 size)
     {
         //블럭을 제거하고 블럭이 있던 자리의 셀을 리로드 함으로 초기화합니다. 
@@ -210,7 +210,6 @@ public class GridSystem : MonoBehaviour
             }
         }
     }
-
     public bool CanPlaceBlock(Vector2 pos, Vector2 objCellSize)
     {
         //블럭을 놓을 자리에 이미 무언가가 있는지 확인하는 함수입니다
@@ -227,31 +226,6 @@ public class GridSystem : MonoBehaviour
         }
         return true;
     }
-
-    IEnumerator ViewGridCell(Vector2 pos, Vector2 objCellSize)
-    {
-        List<CellViewer> objlist = new List<CellViewer>();
-        //블럭이 놓아질 위치를 미리 보여주는 함수
-        for (int x = -1; x <= objCellSize.x; x++)
-        {
-            for (int y = -1; y <= objCellSize.y; y++)
-            {
-                Cell celldata = getCellData((int)pos.x + x, (int)pos.y + y);
-                if (celldata != null)
-                {
-                    GameObject obj = Instantiate(CellViewer);
-                    obj.transform.position = MapPosition2WorldPostion(celldata.GridSpacePostion) + new Vector3(CellSize.x*0.5f, 0,CellSize.y*0.5f);
-                    objlist.Add(obj.GetComponent<CellViewer>());
-                }
-            }
-        }
-        yield return new WaitUntil(()=>previewSetOffset);
-        for (int x = 0; x < objlist.Count; x++)
-        {
-            objlist[x]?.StartDelite();
-        }
-    }
-
     public void SetCurrentBlock(GameObject obj)
     {
         Block blockobj = obj.GetComponent<Block>();
@@ -261,6 +235,38 @@ public class GridSystem : MonoBehaviour
         }
         SetPreview(obj);
     }
-        
+    public bool Vector3EqualVector3(Vector3 A,Vector3 B)
+    {
+        if (!Mathf.Approximately(A.x, B.x)) return false;
+        if (!Mathf.Approximately(A.y, B.y)) return false;
+        if (!Mathf.Approximately(A.z, B.z)) return false;
+        return true;
+
+    }
+    IEnumerator ViewGridCell(Vector2 pos, Vector2 objCellSize)
+    {
+
+        List<CellViewer> objlist = new List<CellViewer>();
+        //블럭이 놓아질 위치를 미리 보여주는 함수
+        for (int x = -1; x <= objCellSize.x; x++)
+        {
+            for (int y = -1; y <= objCellSize.y; y++)
+            {
+                Cell celldata = getCellData((int)pos.x + x, (int)pos.y + y);
+                if (celldata != null && !ActivatedCell.Contains(((int)pos.x + x, (int)pos.y + y)))
+                {
+                    GameObject obj = Instantiate(CellViewer);
+                    obj.transform.position = MapPosition2WorldPostion(celldata.GridSpacePostion) + new Vector3(CellSize.x * 0.5f, -0.4f, CellSize.y * 0.5f);
+                    objlist.Add(obj.GetComponent<CellViewer>());
+                }
+            }
+        }
+        yield return new WaitUntil(() => previewSetOffset);
+        for (int x = 0; x < objlist.Count; x++)
+        {
+            objlist[x]?.StartDelite();
+        }
+    }
+    #endregion
 }
 

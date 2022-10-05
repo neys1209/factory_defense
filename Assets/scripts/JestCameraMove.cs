@@ -6,7 +6,7 @@ public class JestCameraMove : MonoBehaviour
 {
     public float cameraRotSpeed = 1;
     public float cameraZoomSpeed = 5;
-    public float playerSpeed = 5;
+    public float moveSpeed = 5;
 
     Vector3 CameraRot = Vector3.zero;
     Vector3 SmoothCameraRot = Vector3.zero;
@@ -30,11 +30,13 @@ public class JestCameraMove : MonoBehaviour
             if (Input.GetAxis("Mouse X") != Mathf.Epsilon)
             {
                 CameraRot.y += Input.GetAxis("Mouse X") * cameraRotSpeed;
+                cameraZoom = 0;
             }
             if (Input.GetAxis("Mouse Y") != Mathf.Epsilon)
             {
                 CameraRot.x += -Input.GetAxis("Mouse Y") * cameraRotSpeed;
                 CameraRot.x = Mathf.Clamp(CameraRot.x, -50.0f, 80.0f);
+                cameraZoom = 0;
             }
         }
         SmoothCameraRot = Vector3.Slerp(SmoothCameraRot, CameraRot, Time.deltaTime * 10.0f);
@@ -51,7 +53,7 @@ public class JestCameraMove : MonoBehaviour
         Camera.main.transform.localPosition = cameraOffset;
 
         //player movement
-        float delta = playerSpeed * Time.deltaTime;
+        float delta = moveSpeed * Time.deltaTime;
         if (Input.GetAxis("Horizontal") != 0.0f)
         {
             transform.Translate(Vector3.right * Input.GetAxis("Horizontal") * delta);

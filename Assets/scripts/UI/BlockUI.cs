@@ -16,7 +16,6 @@ public class BlockUI : MonoBehaviour
             ui.transform.parent = transform;
             ui.GetComponent<RectTransform>().localPosition = new Vector3(n*110, 0, 0);
             ui.GetComponent<setCurrentBlockUI>().Number = n;
-            
         }
     }
 

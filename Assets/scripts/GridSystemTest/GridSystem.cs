@@ -20,7 +20,11 @@ public class GridSystem : MonoBehaviour
     public GameObject CellViewer;
     bool previewSetOffset = false;
     public static GridSystem Inst;
+
+    Vector2 _lastPlaceOffset = Vector2.zero;
+    public Vector2 lastPlaceOffset { get => _lastPlaceOffset; }
     #endregion
+
     private void Awake()
     {
         Inst = this;
@@ -56,12 +60,19 @@ public class GridSystem : MonoBehaviour
                 {
                     if (Input.GetMouseButton(0))
                     {
-                        PlaceBlock(block.gameObject, hit.point, block.CellSize);
+                        if (PlaceBlock(block.gameObject, hit.point, block.CellSize))
+                            _lastPlaceOffset = WorldPostion2MapPosition(hit.point);
                     }
                     else if (Input.GetMouseButton(1) && !getCellData(hitPos.x, hitPos.y).isEmpty)
                     {
                         GameObject deliteCellData = getCellData(hitPos.x, hitPos.y).GetData();
                         DeltiteCellData(deliteCellData,hitPos,deliteCellData.GetComponent<Block>().CellSize);
+                    }
+                    else if (Input.GetMouseButtonDown(1))
+                    {
+                        block = null;
+                        previewSetOffset = true;
+                        return;
                     }
 
                     if ((int)Vector3.Distance(Vector3.zero, preview.transform.position) != (int)Vector3.Distance(Vector3.zero,GetBlockPosition(WorldPostion2MapPosition(hit.point), block.CellSize)))
@@ -74,7 +85,6 @@ public class GridSystem : MonoBehaviour
                     {
                         if (previewSetOffset)
                         {
-                            Debug.Log("d");
                             previewSetOffset = false;
                             StartCoroutine(ViewGridCell(WorldPostion2MapPosition(hit.point), block.CellSize));
                         }
@@ -85,17 +95,6 @@ public class GridSystem : MonoBehaviour
             }
         }
         else preview?.SetActive(false);
-        
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            string d = "";
-            foreach ((int, int) x in ActivatedCell)
-            {
-                d += x.ToString();
-            }
-            Debug.Log(d);
-        }
-
     }
 
     #region 좌표계변환 함수들
@@ -130,27 +129,34 @@ public class GridSystem : MonoBehaviour
     #endregion
 
     #region 블럭 놓기 관련 함수들
-    public void PlaceBlock(GameObject prefab,Vector3 position,Vector2 objCellSize)
+    public bool PlaceBlock(GameObject prefab,Vector3 position,Vector2 objCellSize)
     {
         //그리드상에 블럭을 놓는 함수입니다
         Vector2 pos = WorldPostion2MapPosition(position); 
         
         if (!CanPlaceBlock(pos,objCellSize))
         {
-            return;
+            return false;
         }
         GameObject obj = Instantiate(prefab);
         obj.transform.position = GetBlockPosition(pos,objCellSize);
         obj.transform.parent = transform;
-        
+        if (obj.GetComponent<Block>().rotatable)
+        {
+            
+        }
+
+
+        //셀 설정
         for (int x = 0; x < objCellSize.x; x++)
         {
             for (int y = 0; y < objCellSize.y; y++)
             {
-                getCellData((int)pos.x + x, (int)pos.y + y)?.SetData(obj);                
+                getCellData((int)pos.x + x, (int)pos.y + y)?.SetData(obj);             
             }
         }
         obj.SetActive(true);
+        return true;
     }
     public Vector3 GetBlockPosition(Vector2 MapPos,Vector2 objCellSize)
     {
@@ -269,4 +275,3 @@ public class GridSystem : MonoBehaviour
     }
     #endregion
 }
-

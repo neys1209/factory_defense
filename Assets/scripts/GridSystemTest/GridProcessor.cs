@@ -6,7 +6,7 @@ public class GridProcessor : MonoBehaviour
 {
     
 
-    public void Processing()
+    public void Processing() //¾È¾¸
     {
         foreach (var Index in GridSystem.ActivatedCell)
         {
@@ -30,6 +30,6 @@ public class GridProcessor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Processing();        
+        
     }
 }

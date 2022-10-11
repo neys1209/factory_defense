@@ -8,12 +8,13 @@ public class Conveyor : Block
     private void Awake()
     {
         myBlock = GetComponent<Block>();
-        myBlock.blockType = Type.Conveyor;
+        blockType = Type.Conveyor;
+        rotatable = true;
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(SetRigidBody());
     }
 
     // Update is called once per frame

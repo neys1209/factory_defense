@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GridSystem : MonoBehaviour
 {
@@ -143,16 +144,17 @@ public class GridSystem : MonoBehaviour
         obj.transform.parent = transform;
         if (obj.GetComponent<Block>().rotatable)
         {
-            
+            Vector2 dir = pos - lastPlaceOffset;
+            obj.GetComponent<Block>().BlockRotate(Array.IndexOf(Block.rotations, ((int)dir.x, (int)dir.y)));
+            Debug.Log(obj.GetComponent<Block>().Rotation);
         }
-
-
         //셀 설정
         for (int x = 0; x < objCellSize.x; x++)
         {
             for (int y = 0; y < objCellSize.y; y++)
             {
-                getCellData((int)pos.x + x, (int)pos.y + y)?.SetData(obj);             
+                getCellData((int)pos.x + x, (int)pos.y + y)?.SetData(obj);
+                obj.GetComponent<Block>().OnCell.Add(getCellData((int)pos.x + x, (int)pos.y + y));
             }
         }
         obj.SetActive(true);
@@ -203,6 +205,27 @@ public class GridSystem : MonoBehaviour
         }
         return null;
     }
+    public Cell getCellData(Vector2 pos)
+    {
+        //getCellData(int,int)의 오버로드2
+        if (0 <= pos.x && pos.x < MapWidth)
+        {
+            if (0 <= pos.y && pos.y < MapHeight)
+                return MapData[(int)pos.x, (int)pos.y];
+        }
+        return null;
+    }
+    public Cell getCellData((int x,int y) pos)
+    {
+        //getCellData(int,int)의 오버로드3
+        if (0 <= pos.x && pos.x < MapWidth)
+        {
+            if (0 <= pos.y && pos.y < MapHeight)
+                return MapData[(int)pos.x, (int)pos.y];
+        }
+        return null;
+    }
+
     public void DeltiteCellData(GameObject obj,Vector2 index, Vector2 size)
     {
         //블럭을 제거하고 블럭이 있던 자리의 셀을 리로드 함으로 초기화합니다. 

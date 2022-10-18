@@ -25,6 +25,8 @@ public class Block : MonoBehaviour
     public List<Resource> Inventory = new List<Resource>();
     [HideInInspector] public List<Cell> OnCell = new List<Cell>();
 
+    public bool Activate = false;
+
     #endregion
 
     private void Start()
@@ -36,6 +38,7 @@ public class Block : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         GetComponent<Rigidbody>().isKinematic = true;
+        Activate = true;
     }
 
     public void BlockRotate(int angle)
@@ -63,6 +66,14 @@ public class Block : MonoBehaviour
 
     public void Processing() //상속받은 클래스에서 구현할 것
     { }
+
+    private void OnDestroy()
+    {
+        foreach (var i in Inventory)
+        {
+            Destroy(i.gameObject);
+        }
+    }
 
     [ContextMenu("회전")]
     public void OneRotate()

@@ -136,7 +136,7 @@ MonoBehaviour:
   prefab: {fileID: 4015273177948617515}
   Inventory: []
   OnCell: []
-  myData: {fileID: 0}
+  myData: {fileID: 11400000, guid: b168bfd4a127b074dafac63c1ba7f464, type: 2}
 --- !u!54 &4443047896113647553
 Rigidbody:
   m_ObjectHideFlags: 0

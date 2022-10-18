@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4c5cef3cb64bc743a06bf12d0013c10, type: 3}
-  m_Name: SliconFactory
+  m_Name: SandGenerator
   m_EditorClassIdentifier: 
-  _ReturnResource: {fileID: 3068526776806230029, guid: 804d36badd9085c468f4598709b4461b, type: 3}
+  _ReturnResource: {fileID: 6187260899884545161, guid: 4f73cf77199330f47a00481d1cce3fda, type: 3}
   _ReturnCount: 1
-  _Deley: 1.5
-  _NeedResource: 0200000003000000
-  _NeedResourceCount: 0200000001000000
+  _Deley: 2
+  _NeedResource: 
+  _NeedResourceCount: 

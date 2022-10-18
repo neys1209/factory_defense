@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
+    public delegate void Action(Resource res);
+
     public enum Type { Air,Iron, Sand, Coal, Silicon } //Air 타입은 아무런 특징이 없는 기본 아이템. 실험용으로만 사용 가능
     [SerializeField]
     Type _type = Type.Air;
@@ -19,13 +21,13 @@ public class Resource : MonoBehaviour
         set => _count = value;
     }
 
-    public void MoveCell(Vector2 dir, float speed, List<Resource> list)
+    public void MoveCell(Vector2 dir, float speed, Action act)
     {
         StopAllCoroutines();
-        StartCoroutine(MoveingCell(dir, speed, list));
+        StartCoroutine(MoveingCell(dir, speed, act));
     }
 
-    IEnumerator MoveingCell(Vector2 dir,float speed,List<Resource> list)
+    IEnumerator MoveingCell(Vector2 dir,float speed,Action act)
     {
         float dist = 1;
         Vector3 movedir = new Vector3(dir.x,0, dir.y);
@@ -38,9 +40,6 @@ public class Resource : MonoBehaviour
             transform.Translate(movedir*delta);
             yield return null;
         }
-        if (list != null)
-            list.Add(this);
-        else
-            Destroy(gameObject);
+        act?.Invoke(this);
     }
 }

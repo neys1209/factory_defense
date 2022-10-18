@@ -7,7 +7,6 @@ public class Factory : Block
 {
 
     [SerializeField] FactoryData myData;
-
     int[] needInventory;
 
     float timer = 0.0f;
@@ -21,15 +20,20 @@ public class Factory : Block
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(SetRigidBody());
         needInventory = new int[myData.NeedResource.Length];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer > 0)
-            timer -= Time.deltaTime;
-        else if (timer < 0) timer = 0.0f;
+        if (Activate)
+        {
+            if (timer > 0)
+                timer -= Time.deltaTime;
+            else if (timer < 0) timer = 0.0f;
+            Processing();
+        }
     }
 
     public bool CanInputResource(Resource.Type res)
@@ -39,20 +43,20 @@ public class Factory : Block
         {
             return false;
         }
-        if (myData.NeedResourceCount[index]*5 > needInventory[index])
+        if (myData.NeedResourceCount[index]*5 <= needInventory[index])
         {
             return false;
         }
         return true;
     }
 
-    public void InputInventory(Resource res)
+    public void InputNeedInventory(Resource res)
     {
         int index = Array.IndexOf(myData.NeedResource, res.type);
         if (index >= 0)
         {
             needInventory[index] += res.count;
-            Destroy(res);
+            Destroy(res.gameObject);
         }
         
     }
@@ -66,7 +70,7 @@ public class Factory : Block
             {
                 if (myData.NeedResourceCount[i] > needInventory[i]) cheak = false;
             }
-            if (cheak)
+            if (cheak && Inventory.Count < 10)
             {
                 for (int i = 0; i < needInventory.Length; i++)
                 {

@@ -146,7 +146,6 @@ public class GridSystem : MonoBehaviour
         {
             Vector2 dir = pos - lastPlaceOffset;
             obj.GetComponent<Block>().BlockRotate(Array.IndexOf(Block.rotations, ((int)dir.x, (int)dir.y)));
-            Debug.Log(obj.GetComponent<Block>().Rotation);
         }
         //¼¿ ¼³Á¤
         for (int x = 0; x < objCellSize.x; x++)
@@ -157,6 +156,7 @@ public class GridSystem : MonoBehaviour
                 obj.GetComponent<Block>().OnCell.Add(getCellData((int)pos.x + x, (int)pos.y + y));
             }
         }
+        
         obj.SetActive(true);
         return true;
     }

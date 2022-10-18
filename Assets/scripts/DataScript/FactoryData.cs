@@ -12,12 +12,12 @@ public class FactoryData : ScriptableObject
     [SerializeField] Resource.Type[] _NeedResource;
     [SerializeField] int[] _NeedResourceCount;
 
-    public GameObject ReturnResource { get => ReturnResource; }
-    public int ReturnCount { get => ReturnCount; }
-    public float Deley { get => Deley; }
+    public GameObject ReturnResource { get => _ReturnResource; }
+    public int ReturnCount { get => _ReturnCount; }
+    public float Deley { get => _Deley; }
 
-    public Resource.Type[] NeedResource { get => NeedResource; }
-    public int[] NeedResourceCount { get => NeedResourceCount; }
+    public Resource.Type[] NeedResource { get => _NeedResource; }
+    public int[] NeedResourceCount { get => _NeedResourceCount; }
 
 
 

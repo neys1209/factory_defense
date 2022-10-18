@@ -31,7 +31,7 @@ public class EnemyAI : Enemy
 
     private bool dead;
 
-    private bool isFire;
+    //private bool isFire;
 
     private bool hasTarget;
 
@@ -46,7 +46,7 @@ public class EnemyAI : Enemy
         dead = false;
         hasTarget = false;
        // agent.updateRotation = false;
-        isFire = false;
+        //isFire = false;
     }
 
     private void Start()

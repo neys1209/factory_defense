@@ -23,7 +23,7 @@ public class Block : MonoBehaviour
     public bool rotatable { get => _rotatable; protected set => _rotatable = value; }
 
     public List<Resource> Inventory = new List<Resource>();
-    public List<Cell> OnCell = new List<Cell>();
+    [HideInInspector] public List<Cell> OnCell = new List<Cell>();
 
     #endregion
 

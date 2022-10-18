@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c5cef3cb64bc743a06bf12d0013c10, type: 3}
+  m_Name: SliconFactory
+  m_EditorClassIdentifier: 
+  _ReturnResource: {fileID: 3068526776806230029, guid: 804d36badd9085c468f4598709b4461b, type: 3}
+  _ReturnCount: 1
+  _Deley: 0.5
+  _NeedResource: 0200000003000000
+  _NeedResourceCount: 0200000001000000

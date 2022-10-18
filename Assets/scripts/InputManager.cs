@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
     //float smoothCameraZoom = 0;
     Vector3 cameraOffset = Vector3.zero;
 
-    bool SetUnitMoveTarget = false;
+    //bool SetUnitMoveTarget = false;
 
     // Start is called before the first frame update
     void Start()

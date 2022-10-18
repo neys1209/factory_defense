@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Conveyor : Block
 {
-    Block myBlock;
     private void Awake()
     {
-        myBlock = GetComponent<Block>();
         blockType = Type.Conveyor;
         rotatable = true;
     }
@@ -46,6 +44,7 @@ public class Conveyor : Block
                             }
                             break;
                         case Type.Factory:
+                            
                             break;
                     }
                 }

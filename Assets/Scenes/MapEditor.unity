@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 71817281f5747344eaa254aff185e2fa, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -146,7 +146,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!114 &104061833
 MonoBehaviour:
@@ -389,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 6187260899884545161, guid: 4f73cf77199330f47a00481d1cce3fda, type: 3}
       propertyPath: m_Name
       value: Sand
+      objectReference: {fileID: 0}
+    - target: {fileID: 6187260899884545161, guid: 4f73cf77199330f47a00481d1cce3fda, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f73cf77199330f47a00481d1cce3fda, type: 3}
@@ -667,6 +671,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coal
       objectReference: {fileID: 0}
+    - target: {fileID: 2500865889347400734, guid: aa4300832253d5b40a97e389e80df2b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3242076328789968290, guid: aa4300832253d5b40a97e389e80df2b0, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -786,6 +794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2500865889347400734, guid: aa4300832253d5b40a97e389e80df2b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3242076328789968290, guid: aa4300832253d5b40a97e389e80df2b0, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -892,6 +904,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sand (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6187260899884545161, guid: 4f73cf77199330f47a00481d1cce3fda, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f73cf77199330f47a00481d1cce3fda, type: 3}
 --- !u!1 &1719527186
@@ -941,6 +957,10 @@ PrefabInstance:
     - target: {fileID: 3068526776806230029, guid: 804d36badd9085c468f4598709b4461b, type: 3}
       propertyPath: m_Name
       value: Silicon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3068526776806230029, guid: 804d36badd9085c468f4598709b4461b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7128055879394104688, guid: 804d36badd9085c468f4598709b4461b, type: 3}
       propertyPath: m_RootOrder
@@ -1090,6 +1110,7 @@ MonoBehaviour:
   - {fileID: 4015273177948617515, guid: 679b91266f620c147a01d032e3c9b040, type: 3}
   - {fileID: 883242357832723554, guid: 0bd23d02595dc864686c9628909d910c, type: 3}
   - {fileID: 998186113251003783, guid: 2f02928ebbe3dcc41a452d4995cbccff, type: 3}
+  - {fileID: 1117848466928983458, guid: 3dacf9b08df5a364ba66bc2195a63db1, type: 3}
 --- !u!4 &1893367081
 Transform:
   m_ObjectHideFlags: 0
@@ -1115,6 +1136,10 @@ PrefabInstance:
     - target: {fileID: 6852900635048653917, guid: c97179848f12b8440ad90cdfd5f331fa, type: 3}
       propertyPath: m_Name
       value: Iron
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852900635048653917, guid: c97179848f12b8440ad90cdfd5f331fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6852900635048653918, guid: c97179848f12b8440ad90cdfd5f331fa, type: 3}
       propertyPath: m_RootOrder

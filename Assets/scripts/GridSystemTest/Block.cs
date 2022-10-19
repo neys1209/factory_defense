@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [SelectionBase]
 [System.Serializable]
@@ -8,10 +9,11 @@ public class Block : MonoBehaviour
 {
     #region 변수
     public int TeamCode = 0;
-    public enum Type { None, Turret, Factory, Wall, Conveyor }
+    public enum Type { None, Turret, Factory, Wall, Conveyor, Storage }
     public Vector2 CellSize = new Vector2(1, 1);
     public Type blockType = Type.None;
     public GameObject prefab;
+    public int InventoryCount { get; private set; }
 
     static protected (int x, int y)[] _rotations = {(0, -1), (-1, 0), (0, 1), (1, 0) };
     static public (int x, int y)[] rotations { get => _rotations;}
@@ -31,7 +33,12 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
+        init();
+    }
+    public void init()
+    {
         StartCoroutine(SetRigidBody());
+        InventoryCount = 0;
     }
 
     protected IEnumerator SetRigidBody()
@@ -63,7 +70,6 @@ public class Block : MonoBehaviour
     {
         return new Vector2(Rotation.x, Rotation.y);
     }
-
     public void Processing() //상속받은 클래스에서 구현할 것
     { }
 
@@ -71,7 +77,8 @@ public class Block : MonoBehaviour
     {
         foreach (var i in Inventory)
         {
-            Destroy(i.gameObject);
+            if (i.gameObject != null)
+                Destroy(i.gameObject);
         }
     }
 
@@ -80,4 +87,75 @@ public class Block : MonoBehaviour
     {
         BlockRotate(1);
     }
+
+    public void InputInventory(Resource res)
+    {
+        Resource find = Inventory.Find(x => x.type == res.type);
+        if (find != null)
+        {
+            Debug.Log("susses");
+            find.count++;
+            Destroy(res.gameObject);
+        }
+        else
+        {
+            Inventory.Add(res);
+        }
+        if (blockType == Type.Conveyor)
+        {
+            foreach (var item in Inventory)
+            {
+                item.transform.position = transform.position + Vector3.up * 0.1f;
+                if (item == null)
+                {
+                    Inventory.Remove(item);
+                    InventoryCount--;
+                }
+            }
+        }
+        InventoryCount++;
+    }
+
+    public Resource OutputInventory(int index)
+    {
+        if (index < 0 || Inventory.Count < index - 1) return null;
+        InventoryCount--;
+        if (Inventory[index].count == 1)
+        {
+            Resource ret = Inventory[index];
+            Inventory.RemoveAt(index);
+            return ret;
+
+        }
+        else
+        {
+            Inventory[index].count--;
+            GameObject obj = Instantiate(Inventory[index].gameObject, transform.position, Quaternion.identity);
+            Resource ret = obj.GetComponent<Resource>();
+            ret.count = 1;
+            return ret;
+        }
+    }
+    public Resource OutputInventory(Resource.Type restype)
+    {
+        int index = Inventory.FindIndex(x=>x.type==restype);
+        if (index < 0) return null;
+        InventoryCount--;
+        if (Inventory[index].count == 1)
+        {
+            Resource ret = Inventory[index];
+            Inventory.RemoveAt(index);
+            return ret;
+
+        }
+        else
+        {
+            Inventory[index].count--;
+            GameObject obj = Instantiate(Inventory[index].gameObject, transform.position, Quaternion.identity,ResourceList.Inst.transform);
+            Resource ret = obj.GetComponent<Resource>();
+            ret.count = 1;
+            return ret;
+        }
+    }
+
 }

@@ -21,6 +21,8 @@ public class setCurrentBlockUI: MonoBehaviour
         obj.layer = LayerMask.NameToLayer("UI");
         if (obj.transform.childCount > 0)
             obj.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("UI");
+        obj.GetComponent<Block>().StopAllCoroutines();
+        obj.GetComponent<Block>().Activate = false;
     }
 
     // Update is called once per frame

@@ -12,7 +12,7 @@ public class Conveyor : Block
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SetRigidBody());
+        init();
     }
 
     // Update is called once per frame
@@ -20,18 +20,16 @@ public class Conveyor : Block
     {
         if (Activate)
         {
-            foreach (var item in Inventory)
-            {
-                item.transform.position = transform.position + Vector3.up * 0.1f;
-                if (item == null) Inventory.Remove(item);
-            }
+            
             Processing();
         }
     }
 
+
+
     new public void Processing()
     {
-        if (Inventory.Count != 0)
+        if (InventoryCount != 0)
         {
             foreach (var cell in OnCell)
             {        
@@ -42,10 +40,10 @@ public class Conveyor : Block
                     switch (cellblock.blockType)
                     {
                         case Type.Conveyor:
-                            if (adjacentCells.GetComponent<Block>().Inventory.Count == 0)
+                            if (adjacentCells.GetComponent<Block>().InventoryCount == 0)
                             {
-                                Inventory[0].MoveCell(VectorRotation(), 2f, (res) => cellblock.Inventory.Add(res));
-                                Inventory.RemoveAt(0);
+                                Inventory[0].MoveCell(VectorRotation(), 2f, cellblock.InputInventory);
+                                OutputInventory(0);
                             }
                             break;
                         case Type.Factory:
@@ -53,9 +51,14 @@ public class Conveyor : Block
                             {
                                 Inventory[0].MoveCell(VectorRotation(), 2f, 
                                     adjacentCells.GetComponent<Factory>().InputNeedInventory);
-                                Inventory.RemoveAt(0);
+                                OutputInventory(0);
                             }
                             break;
+                        case Type.Storage:
+                            Inventory[0].MoveCell(VectorRotation(), 2f, cellblock.InputInventory);
+                            OutputInventory(0);
+                            break;
+
                     }
                 }
             }
@@ -71,11 +74,12 @@ public class Conveyor : Block
                     switch (cellblock.blockType)
                     {
                         case Type.Factory:
-                            if (cellblock.Inventory.Count != 0)
+                            if (cellblock.InventoryCount != 0)
                             {
+                                //if (cellblock.Inventory[0]/)
                                 cellblock.Inventory[0].gameObject.SetActive(true);
-                                cellblock.Inventory[0].MoveCell(VectorRotation(), 2f, (res) => Inventory.Add(res));
-                                cellblock.Inventory.RemoveAt(0);
+                                cellblock.Inventory[0].MoveCell(VectorRotation(), 2f, InputInventory);
+                                cellblock.OutputInventory(0);
                             }
                             break;
                     }

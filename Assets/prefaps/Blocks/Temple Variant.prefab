@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1.06, z: 0}
---- !u!114 &1890907818013065092
+--- !u!114 &-8200092856621291601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,10 +108,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117848466928983458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ec9574f6b22bd44e8411ad7dbaac301, type: 3}
+  m_Script: {fileID: 11500000, guid: 0183439c8b2e4114185cf47d753185c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TeamCode: 0
   CellSize: {x: 3, y: 3}
-  blockType: 2
-  prefab: {fileID: 1117848466928983458}
+  blockType: 5
+  prefab: {fileID: 0}
+  Inventory: []
+  OnCell: []
+  Activate: 0

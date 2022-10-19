@@ -20,7 +20,7 @@ public class Factory : Block
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SetRigidBody());
+        init();
         needInventory = new int[myData.NeedResource.Length];
     }
 
@@ -70,15 +70,15 @@ public class Factory : Block
             {
                 if (myData.NeedResourceCount[i] > needInventory[i]) cheak = false;
             }
-            if (cheak && Inventory.Count < 10)
+            if (cheak && InventoryCount < 10)
             {
                 for (int i = 0; i < needInventory.Length; i++)
                 {
                     needInventory[i] -= myData.NeedResourceCount[i];
                 }
-                GameObject obj = Instantiate(myData.ReturnResource, transform.position, Quaternion.identity, transform) as GameObject;
+                GameObject obj = Instantiate(myData.ReturnResource, transform.position, Quaternion.identity, ResourceList.Inst.transform) as GameObject;
                 obj.SetActive(false);
-                Inventory.Add(obj.GetComponent<Resource>());
+                InputInventory(obj.GetComponent<Resource>()); 
             }
             timer = myData.Deley;
         }

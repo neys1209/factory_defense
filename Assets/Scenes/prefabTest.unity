@@ -858,6 +858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SandCube
       objectReference: {fileID: 0}
+    - target: {fileID: 998186113251003783, guid: 2f02928ebbe3dcc41a452d4995cbccff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2595510901561991745, guid: 2f02928ebbe3dcc41a452d4995cbccff, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1101,6 +1105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SiliconFactory
       objectReference: {fileID: 0}
+    - target: {fileID: 4015273177948617515, guid: 679b91266f620c147a01d032e3c9b040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7231187409880780639, guid: 679b91266f620c147a01d032e3c9b040, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1293,6 +1301,10 @@ PrefabInstance:
     - target: {fileID: 883242357832723554, guid: 0bd23d02595dc864686c9628909d910c, type: 3}
       propertyPath: m_Name
       value: CoalCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 883242357832723554, guid: 0bd23d02595dc864686c9628909d910c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5894466805996655656, guid: 0bd23d02595dc864686c9628909d910c, type: 3}
       propertyPath: m_RootOrder

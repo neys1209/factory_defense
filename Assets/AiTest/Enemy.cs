@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     
     private int Hp;
 
-    public int HP
+    public int _HP
     {
         get => Hp;
 

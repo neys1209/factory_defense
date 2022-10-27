@@ -10,12 +10,14 @@ public class GroundUnit : Unit
     public UnitStat myInfo;
 
     NavMeshAgent myNav;
+    NavMeshPath myNavPath;
 
     // Start is called before the first frame update
     void Start()
     {
         UnitManager.instance.UnitList.Add(gameObject);
         myNav = gameObject.GetComponent<NavMeshAgent>();
+        myNavPath = new NavMeshPath();
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class GroundUnit : Unit
 
     public void StartMoveToTarget(Vector3 target, float radius)
     {
+        
         if (coMove != null)
         {
             StopCoroutine(coMove);
@@ -35,13 +38,12 @@ public class GroundUnit : Unit
             StopCoroutine(coRot);
         }
         coMove = StartCoroutine(MoveToPosition(target, radius));
-        coRot = StartCoroutine(RotateToTarget(target));
+        //coRot = StartCoroutine(RotateToTarget(target));
     }
 
     IEnumerator MoveToPosition(Vector3 target, float radius = 0)
     {
-
-        yield return null;
+        yield return new WaitForSeconds(radius);
     }
 
     IEnumerator RotateToTarget(Vector3 target)

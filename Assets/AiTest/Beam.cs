@@ -27,7 +27,7 @@ public class Beam : MonoBehaviour
     {
         if (target != null)
         {
-            Vector3 dir = target.transform.position - transform.position;
+            Vector3 dir = (target.transform.position + new Vector3(0, 1, 0)) - transform.position;
             transform.forward = dir;
             transform.position += dir.normalized * Time.deltaTime * 50f;
             transform.localRotation =
@@ -43,7 +43,7 @@ public class Beam : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if ((layerMask & 1 << other.gameObject.layer) != 0)
-        {
+        {          
             Destroy(gameObject);
         }
     }

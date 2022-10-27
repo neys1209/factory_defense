@@ -60,14 +60,19 @@ public class AirUnit : Unit
     IEnumerator RotateToTarget(Vector3 target)
     {
         Vector3 dir = target - transform.position;
+        if (dir.magnitude <= Mathf.Epsilon) yield break;
         dir.Normalize();
         float angle = Mathf.Acos(Vector3.Dot(dir,transform.forward)) * Mathf.Rad2Deg;
         float rotDir = Vector3.Dot(dir, transform.right) < 0.0f ? -1.0f : 1.0f;
-
+        
+        if (angle <= Mathf.Epsilon) yield break;
         while (angle > Mathf.Epsilon)
         {
             float delta = Time.deltaTime * myInfo.RotateSpeed;
-            if (angle < delta) delta = angle;
+            if (angle < delta)
+            {
+                delta = angle;
+            }
             transform.Rotate(Vector3.up * delta * rotDir,Space.World);
             angle -= delta;
             yield return null;

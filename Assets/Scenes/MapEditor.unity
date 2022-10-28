@@ -163,6 +163,7 @@ MonoBehaviour:
   block: {fileID: 0}
   previewMaterial: {fileID: 2100000, guid: 5984a6ee2619ef14f874b647edad3688, type: 2}
   CellViewer: {fileID: 3618881246495424721, guid: de9be53d165ee604da0d152479a6774d, type: 3}
+  Offset: {x: 0.5, y: 0, z: 0.5}
 --- !u!65 &104061834
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d86005a29439b7541ade84523818db1a, type: 2}
+  - {fileID: 2100000, guid: 5d8af8f434f69794eabd684fb44b4fbf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -235,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 104061832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 1, z: 30}
+  m_LocalScale: {x: 80, y: 1, z: 80}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1107,10 +1108,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlockList:
   - {fileID: 3429914673242447975, guid: b7f5cc765066aa44db303d54cb719949, type: 3}
+  - {fileID: 7883509579708173671, guid: 879c5956d854f4d4bb6837e05e82ddbf, type: 3}
   - {fileID: 4015273177948617515, guid: 679b91266f620c147a01d032e3c9b040, type: 3}
   - {fileID: 883242357832723554, guid: 0bd23d02595dc864686c9628909d910c, type: 3}
   - {fileID: 998186113251003783, guid: 2f02928ebbe3dcc41a452d4995cbccff, type: 3}
-  - {fileID: 1117848466928983458, guid: 3dacf9b08df5a364ba66bc2195a63db1, type: 3}
+  - {fileID: 8060826358135812787, guid: 2b67090544c32a64aac5f2623a3fb055, type: 3}
+  - {fileID: 3377826371005270702, guid: fc5da9a447d0fe548845441240a19dae, type: 3}
 --- !u!4 &1893367081
 Transform:
   m_ObjectHideFlags: 0
@@ -1241,6 +1244,7 @@ MonoBehaviour:
   - {fileID: 4525525253172130631, guid: aa4300832253d5b40a97e389e80df2b0, type: 3}
   - {fileID: 5099331483386032331, guid: 4f73cf77199330f47a00481d1cce3fda, type: 3}
   - {fileID: 6971170064330957063, guid: 804d36badd9085c468f4598709b4461b, type: 3}
+  - {fileID: 4833070927504575561, guid: 7ac7aadb49459674b9a3d358c1061c1a, type: 3}
 --- !u!1001 &6811129030658582946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1262,7 +1266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6811129030952695476, guid: 07629b0e97f52c04193e766b71061f8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.5687065
+      value: 4.89
       objectReference: {fileID: 0}
     - target: {fileID: 6811129030952695476, guid: 07629b0e97f52c04193e766b71061f8d, type: 3}
       propertyPath: m_LocalPosition.z

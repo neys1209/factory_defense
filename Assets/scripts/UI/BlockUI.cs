@@ -13,7 +13,7 @@ public class BlockUI : MonoBehaviour
         for (int n = 0; n < Blocks.Inst.BlockList.Count; n++)
         {
             GameObject ui = Instantiate(uiPrefab);
-            ui.transform.parent = transform;
+            ui.transform.SetParent(transform);
             ui.GetComponent<RectTransform>().localPosition = new Vector3(n*110, 0, 0);
             ui.GetComponent<setCurrentBlockUI>().Number = n;
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FDBlock;
 
 public class setCurrentBlockUI: MonoBehaviour
 {
@@ -20,7 +21,10 @@ public class setCurrentBlockUI: MonoBehaviour
         obj.transform.localScale = obj.transform.localScale * 6;
         obj.layer = LayerMask.NameToLayer("UI");
         if (obj.transform.childCount > 0)
-            obj.transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("UI");
+            for (int i = 0; i <obj.transform.childCount; i++)
+            {
+                obj.transform.GetChild(i).gameObject.layer = LayerMask.NameToLayer("UI");
+            }
         obj.GetComponent<Block>().StopAllCoroutines();
         obj.GetComponent<Block>().Activate = false;
     }

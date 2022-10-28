@@ -3,86 +3,90 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Factory : Block
+namespace FDBlock
 {
 
-    [SerializeField] FactoryData myData;
-    int[] needInventory;
-
-    float timer = 0.0f;
-
-    private void Awake()
+    public class Factory : Block
     {
-        blockType = Type.Factory;
-        rotatable = false;
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        init();
-        needInventory = new int[myData.NeedResource.Length];
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Activate)
+        [SerializeField] FactoryData myData;
+        int[] needInventory;
+
+        float timer = 0.0f;
+
+        private void Awake()
         {
-            if (timer > 0)
-                timer -= Time.deltaTime;
-            else if (timer < 0) timer = 0.0f;
-            Processing();
+            blockType = Type.Factory;
+            rotatable = false;
         }
-    }
 
-    public bool CanInputResource(Resource.Type res)
-    {
-        int index = Array.IndexOf(myData.NeedResource, res);
-        if (index < 0)
+        // Start is called before the first frame update
+        void Start()
         {
-            return false;
+            init();
+            needInventory = new int[myData.NeedResource.Length];
         }
-        if (myData.NeedResourceCount[index]*5 <= needInventory[index])
-        {
-            return false;
-        }
-        return true;
-    }
 
-    public void InputNeedInventory(Resource res)
-    {
-        int index = Array.IndexOf(myData.NeedResource, res.type);
-        if (index >= 0)
+        // Update is called once per frame
+        void Update()
         {
-            needInventory[index] += res.count;
-            Destroy(res.gameObject);
-        }
-        
-    }
-
-    new public void Processing()
-    {
-        if (timer == 0)
-        {
-            bool cheak = true;
-            for (int i = 0; i < needInventory.Length; i++)
+            if (Activate)
             {
-                if (myData.NeedResourceCount[i] > needInventory[i]) cheak = false;
+                if (timer > 0)
+                    timer -= Time.deltaTime;
+                else if (timer < 0) timer = 0.0f;
+                Processing();
             }
-            if (cheak && InventoryCount < 10)
+        }
+
+        public bool CanInputResource(Resource.Type res)
+        {
+            int index = Array.IndexOf(myData.NeedResource, res);
+            if (index < 0)
             {
+                return false;
+            }
+            if (myData.NeedResourceCount[index] * 5 <= needInventory[index])
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void InputNeedInventory(Resource res)
+        {
+            int index = Array.IndexOf(myData.NeedResource, res.type);
+            if (index >= 0)
+            {
+                needInventory[index] += res.count;
+                Destroy(res.gameObject);
+            }
+
+        }
+
+        new public void Processing()
+        {
+            if (timer == 0)
+            {
+                bool cheak = true;
                 for (int i = 0; i < needInventory.Length; i++)
                 {
-                    needInventory[i] -= myData.NeedResourceCount[i];
+                    if (myData.NeedResourceCount[i] > needInventory[i]) cheak = false;
                 }
-                GameObject obj = Instantiate(myData.ReturnResource, transform.position, Quaternion.identity, ResourceList.Inst.transform) as GameObject;
-                obj.SetActive(false);
-                InputInventory(obj.GetComponent<Resource>()); 
+                if (cheak && InventoryCount < 10)
+                {
+                    for (int i = 0; i < needInventory.Length; i++)
+                    {
+                        needInventory[i] -= myData.NeedResourceCount[i];
+                    }
+                    GameObject obj = Instantiate(myData.ReturnResource, transform.position, Quaternion.identity, ResourceList.Inst.transform) as GameObject;
+                    obj.SetActive(false);
+                    InputInventory(obj.GetComponent<Resource>());
+                }
+                timer = myData.Deley;
             }
-            timer = myData.Deley;
-        }
-        
 
+
+        }
     }
 }

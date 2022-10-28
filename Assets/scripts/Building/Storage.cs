@@ -2,16 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Storage : Block
+
+namespace FDBlock
 {
-    private void Awake()
+    public class Storage : Block
     {
-        blockType = Type.Storage;
-        rotatable = true;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        init();
+        private void Awake()
+        {
+            blockType = Type.Storage;
+            rotatable = true;
+        }
+        // Start is called before the first frame update
+        void Start()
+        {
+            init();
+        }
+
+        private void Update()
+        {
+            foreach (var item in Inventory)
+            {
+                item.gameObject.SetActive(false);
+            }
+        }
     }
 }

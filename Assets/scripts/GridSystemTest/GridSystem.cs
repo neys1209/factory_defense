@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FDBlock;
 
 public class GridSystem : MonoBehaviour
 {
     #region 변수
-    public const int MapWidth = 30;
-    public const int MapHeight = 30;
+    public const int MapWidth = 80;
+    public const int MapHeight = 80;
     
     public static Cell[,] MapData = new Cell[MapWidth,MapHeight];
     public static List<(int x, int y)> ActivatedCell = new List<(int x, int y)>();
@@ -24,6 +25,8 @@ public class GridSystem : MonoBehaviour
 
     Vector2 _lastPlaceOffset = Vector2.zero;
     public Vector2 lastPlaceOffset { get => _lastPlaceOffset; }
+
+    public Vector3 Offset = new Vector3(CellSize.x * 0.5f, 0, CellSize.y * 0.5f);
     #endregion
 
     private void Awake()
@@ -35,13 +38,21 @@ public class GridSystem : MonoBehaviour
             {
                 MapData[x, y] = new Cell();
                 MapData[x, y].GridSpacePostion = new Vector2(x, y);
+                if (UnityEngine.Random.Range(0, 100) < 3)
+                    MapData[x, y].OnResourcetype = Resource.Type.Coal;
             }
         }
         CellSize = new Vector2(transform.localScale.x / MapWidth, transform.localScale.z / MapHeight);
     }
     void Start()
     {
-        
+        for (int x = 0; x < MapWidth; x++)
+        {
+            for (int y = 0; y < MapHeight; y++)
+            {
+                MapData[x, y].Init();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -76,6 +87,14 @@ public class GridSystem : MonoBehaviour
                         return;
                     }
 
+                    if (Input.GetKeyDown(KeyCode.R))
+                    {
+                        if (preview.GetComponent<Block>().rotatable)
+                        {
+                            preview.GetComponent<Block>().OneRotate();
+                        }
+                    }
+
                     if ((int)Vector3.Distance(Vector3.zero, preview.transform.position) != (int)Vector3.Distance(Vector3.zero,GetBlockPosition(WorldPostion2MapPosition(hit.point), block.CellSize)))
                     {
                         preview.transform.position = GetBlockPosition(WorldPostion2MapPosition(hit.point), block.CellSize);
@@ -91,9 +110,10 @@ public class GridSystem : MonoBehaviour
                         }
                     }
                     preview.SetActive(true);
-
                 }
             }
+
+            if (Input.GetMouseButtonUp(0)) _lastPlaceOffset = Vector2.zero;
         }
         else preview?.SetActive(false);
     }
@@ -140,12 +160,20 @@ public class GridSystem : MonoBehaviour
             return false;
         }
         GameObject obj = Instantiate(prefab);
+        Block objBlock = obj.GetComponent<Block>();
         obj.transform.position = GetBlockPosition(pos,objCellSize);
         obj.transform.parent = transform;
-        if (obj.GetComponent<Block>().rotatable)
+        if (objBlock.rotatable)
         {
             Vector2 dir = pos - lastPlaceOffset;
-            obj.GetComponent<Block>().BlockRotate(Array.IndexOf(Block.rotations, ((int)dir.x, (int)dir.y)));
+            if (dir.magnitude <= 1.1f)
+            {
+                objBlock.BlockRotate(Array.IndexOf(Block.rotations, ((int)dir.x, (int)dir.y)));
+            }
+            else
+            {
+                objBlock.SetRotation(preview.GetComponent<Block>().GetRotationIndex());
+            }
         }
         //셀 설정
         for (int x = 0; x < objCellSize.x; x++)
@@ -153,7 +181,7 @@ public class GridSystem : MonoBehaviour
             for (int y = 0; y < objCellSize.y; y++)
             {
                 getCellData((int)pos.x + x, (int)pos.y + y)?.SetData(obj);
-                obj.GetComponent<Block>().OnCell.Add(getCellData((int)pos.x + x, (int)pos.y + y));
+                objBlock.OnCell.Add(getCellData((int)pos.x + x, (int)pos.y + y));
             }
         }
         
@@ -230,6 +258,7 @@ public class GridSystem : MonoBehaviour
     {
         //블럭을 제거하고 블럭이 있던 자리의 셀을 리로드 함으로 초기화합니다. 
         //만일의 사태를 대비해 인근의 셀들이 모두 리로드됩니다.
+        obj.GetComponent<Block>()?.DestoryMyself();
         DestroyImmediate(obj); //즉시 삭제함수
         for (int x = (int)(index.x - size.x + 1); x < index.x + size.x; x++)
         {

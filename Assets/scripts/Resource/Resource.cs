@@ -6,7 +6,8 @@ public class Resource : MonoBehaviour
 {
     public delegate void Action(Resource res);
 
-    public enum Type { Air,Iron, Sand, Coal, Silicon } //Air 타입은 아무런 특징이 없는 기본 아이템. 실험용으로만 사용 가능
+    public enum Type { Air, Iron, Sand, Coal, Silicon,CarbonAlloy } //Air 타입은 아무런 특징이 없는 기본 아이템. 실험용으로만 사용 가능
+
     [SerializeField]
     Type _type = Type.Air;
     public Type type

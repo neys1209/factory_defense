@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FDBlock;
 
 [System.Serializable]
 public class Cell
@@ -11,7 +12,9 @@ public class Cell
     public bool isEmpty = true;
     GameObject data;
     Block blockData;
-    
+
+    public Resource.Type OnResourcetype = Resource.Type.Air;
+
     public void SetData(GameObject obj)
     {
         data = obj;
@@ -29,6 +32,17 @@ public class Cell
         return blockData;
     }
     
+    public void Init()
+    {
+        if (OnResourcetype != Resource.Type.Air)
+        {
+            GameObject obj = GameObject.Instantiate(ResourceList.Inst.dictionary[OnResourcetype]);
+            obj.transform.position = GridSystem.Inst.MapPosition2WorldPostion(GridSpacePostion) + GridSystem.Inst.Offset;
+            obj.transform.localScale = obj.transform.localScale * 1.3f;
+            obj.transform.Translate(Vector3.down * 0.5f);
+            obj.transform.parent = GridSystem.Inst.transform;
+        }
+    }
 
     public void Reload()
     {

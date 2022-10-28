@@ -65,7 +65,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
-        if(finishiedSpawning == true && GameObject.FindGameObjectsWithTag("Enemy").Length == 0 )
+        if(finishiedSpawning == true )
         {
             finishiedSpawning = false;
             if(currentWaveIndex + 1 < waves.Length)

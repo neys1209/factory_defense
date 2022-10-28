@@ -6,10 +6,8 @@ using FDBlock;
 public class GridProcessor : MonoBehaviour
 {
     
-
-    public void Processing() //¾È¾¸
+    public void Processing() //ï¿½È¾ï¿½
     {
-        foreach (var Index in GridSystem.ActivatedCell)
         {
             Cell cell = GridSystem.Inst.getCellData(Index.x, Index.y);
             if (cell == null) continue;
@@ -26,9 +24,8 @@ public class GridProcessor : MonoBehaviour
                     break;
             }
         }
-    }
-
-    // Update is called once per frame
+    public void Processing()
+    {
     void Update()
     {
         

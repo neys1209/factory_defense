@@ -6,7 +6,7 @@ public class Resource : MonoBehaviour
 {
     public delegate void Action(Resource res);
 
-    public enum Type { Air, Iron, Sand, Coal, Silicon,CarbonAlloy } //Air Å¸ÀÔÀº ¾Æ¹«·± Æ¯Â¡ÀÌ ¾ø´Â ±âº» ¾ÆÀÌÅÛ. ½ÇÇè¿ëÀ¸·Î¸¸ »ç¿ë °¡´É
+    public enum Type { Air, Iron, Sand, Coal, Silicon,CarbonAlloy } //Air Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½ï¿½ Æ¯Â¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     [SerializeField]
     Type _type = Type.Air;

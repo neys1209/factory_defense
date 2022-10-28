@@ -11,7 +11,7 @@ namespace FDBlock
     [System.Serializable]
     public class Block : MonoBehaviour
     {
-        #region º¯¼ö
+        #region ï¿½ï¿½ï¿½ï¿½
         public int TeamCode = 0;
         public enum Type { None, Turret, Factory, Wall, Conveyor, Storage, Drill }
         public Vector2 CellSize = new Vector2(1, 1);
@@ -85,7 +85,7 @@ namespace FDBlock
         {
             return new Vector2(Rotation.x, Rotation.y);
         }
-        public void Processing() //»ó¼Ó¹ÞÀº Å¬·¡½º¿¡¼­ ±¸ÇöÇÒ °Í
+        public void Processing() //ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         { }
 
         public void DestoryMyself()
@@ -97,7 +97,7 @@ namespace FDBlock
             }
         }
 
-        [ContextMenu("È¸Àü")]
+        [ContextMenu("È¸ï¿½ï¿½")]
         public void OneRotate(bool real = true)
         {
             BlockRotate(1,real);

@@ -6,7 +6,7 @@ using FDBlock;
 
 public class GridSystem : MonoBehaviour
 {
-    #region º¯¼ö
+    #region ï¿½ï¿½ï¿½ï¿½
     public const int MapWidth = 80;
     public const int MapHeight = 80;
     
@@ -118,10 +118,10 @@ public class GridSystem : MonoBehaviour
         else preview?.SetActive(false);
     }
 
-    #region ÁÂÇ¥°èº¯È¯ ÇÔ¼öµé
+    #region ï¿½ï¿½Ç¥ï¿½èº¯È¯ ï¿½Ô¼ï¿½ï¿½ï¿½
     public Vector2 WorldPostion2MapPosition(Vector3 Wp)
     {
-        //¿ùµåÀÇ ÁÂÇ¥¸¦ ±×¸®µå»óÀÇ ÁÂÇ¥·Î º¯È¯ÇÕ´Ï´Ù
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½
         float x = Wp.x;
         float y = Wp.z;
 
@@ -135,7 +135,7 @@ public class GridSystem : MonoBehaviour
     }
     public Vector3 MapPosition2WorldPostion(Vector2 Mp)
     {
-        //±×¸®µå»óÀÇ ÁÂÇ¥¸¦ ¿ùµå ÁÂÇ¥°è·Î º¯È¯ÇÕ´Ï´Ù. ´Ù¸¸ y°ªÀº °íÁ¤µÇ¾î ÀÖ½À´Ï´Ù
+        //ï¿½×¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½. ï¿½Ù¸ï¿½ yï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½
         float x = Mp.x;
         float y = Mp.y;
         x -= transform.lossyScale.x * 0.5f;
@@ -149,10 +149,10 @@ public class GridSystem : MonoBehaviour
     }
     #endregion
 
-    #region ºí·° ³õ±â °ü·Ã ÇÔ¼öµé
+    #region ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½
     public bool PlaceBlock(GameObject prefab,Vector3 position,Vector2 objCellSize)
     {
-        //±×¸®µå»ó¿¡ ºí·°À» ³õ´Â ÇÔ¼öÀÔ´Ï´Ù
+        //ï¿½×¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½
         Vector2 pos = WorldPostion2MapPosition(position); 
         
         if (!CanPlaceBlock(pos,objCellSize))
@@ -175,7 +175,7 @@ public class GridSystem : MonoBehaviour
                 objBlock.SetRotation(preview.GetComponent<Block>().GetRotationIndex());
             }
         }
-        //¼¿ ¼³Á¤
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         for (int x = 0; x < objCellSize.x; x++)
         {
             for (int y = 0; y < objCellSize.y; y++)
@@ -190,12 +190,12 @@ public class GridSystem : MonoBehaviour
     }
     public Vector3 GetBlockPosition(Vector2 MapPos,Vector2 objCellSize)
     {
-        //ºí·°À» ³õÀ» ¶§ ¿©·¯Ä­À» Â÷ÁöÇÏ´Â ºí·°ÀÇ À§Ä¡¸¦ °¡¿îµ¥·Î Á¶Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½îµ¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½
         return MapPosition2WorldPostion(MapPos) + new Vector3(CellSize.x * 0.5f * (objCellSize.x), 0.0f, CellSize.y * 0.5f * (objCellSize.y));
     }
     private void SetPreview(GameObject obj)
     {
-        //¼³Ä¡ÇÒ ºí·°ÀÇ ÇÁ¸®ºä¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù.
+        //ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ä¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
         if (preview != null) Destroy(preview);
         if (obj == null) return;
         preview = Instantiate(obj);
@@ -208,12 +208,12 @@ public class GridSystem : MonoBehaviour
 
     #endregion
 
-    #region ±âÅ¸ °è»ê/ÆíÀÇ ÇÔ¼ö
+    #region ï¿½ï¿½Å¸ ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     public Cell getCellData(int x, int y)
     {
-        //ÀÎµ¦½º(±×¸®µå ÁÂÇ¥)¸¦ ÅëÇØ ±× ÁÂÇ¥ÀÇ ¼¿ µ¥ÀÌÅÍ¸¦ ¾ò¾î¿É´Ï´Ù
-        //¸Ê µ¥ÀÌÅÍ ¹è¿­¿¡ Á÷Á¢ Á¢±ÙÇÏ´Â °æ¿ì ÀÎµ¦½º ¿¡·¯°¡ ³¯ ¼ö ÀÖÀ¸´Ï º» ÇÔ¼ö¸¦ »ç¿ëÇÏ±â¸¦ ±ÇÀåÇÕ´Ï´Ù
-        //ÀÎµ¦½º¸¦ ÃÊ°úÇÏ´Â °æ¿ì nullÀ» ¸®ÅÏÇÕ´Ï´Ù
+        //ï¿½Îµï¿½ï¿½ï¿½(ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½É´Ï´ï¿½
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½
+        //ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½
         if (0 <= x && x < MapWidth)
         {
             if (0 <= y && y < MapHeight)
@@ -225,7 +225,7 @@ public class GridSystem : MonoBehaviour
     }
     public Cell getCellData(float x, float y)
     {
-        //getCellData(int,int)ÀÇ ¿À¹ö·Îµå
+        //getCellData(int,int)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½
         if (0 <= x && x < MapWidth)
         {
             if (0 <= y && y < MapHeight)
@@ -235,7 +235,7 @@ public class GridSystem : MonoBehaviour
     }
     public Cell getCellData(Vector2 pos)
     {
-        //getCellData(int,int)ÀÇ ¿À¹ö·Îµå2
+        //getCellData(int,int)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½2
         if (0 <= pos.x && pos.x < MapWidth)
         {
             if (0 <= pos.y && pos.y < MapHeight)
@@ -245,7 +245,7 @@ public class GridSystem : MonoBehaviour
     }
     public Cell getCellData((int x,int y) pos)
     {
-        //getCellData(int,int)ÀÇ ¿À¹ö·Îµå3
+        //getCellData(int,int)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Îµï¿½3
         if (0 <= pos.x && pos.x < MapWidth)
         {
             if (0 <= pos.y && pos.y < MapHeight)
@@ -256,10 +256,10 @@ public class GridSystem : MonoBehaviour
 
     public void DeltiteCellData(GameObject obj,Vector2 index, Vector2 size)
     {
-        //ºí·°À» Á¦°ÅÇÏ°í ºí·°ÀÌ ÀÖ´ø ÀÚ¸®ÀÇ ¼¿À» ¸®·Îµå ÇÔÀ¸·Î ÃÊ±âÈ­ÇÕ´Ï´Ù. 
-        //¸¸ÀÏÀÇ »çÅÂ¸¦ ´ëºñÇØ ÀÎ±ÙÀÇ ¼¿µéÀÌ ¸ðµÎ ¸®·ÎµåµË´Ï´Ù.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½. 
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½Ë´Ï´ï¿½.
         obj.GetComponent<Block>()?.DestoryMyself();
-        DestroyImmediate(obj); //Áï½Ã »èÁ¦ÇÔ¼ö
+        DestroyImmediate(obj); //ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½
         for (int x = (int)(index.x - size.x + 1); x < index.x + size.x; x++)
         {
             for (int y = (int)(index.y - size.y + 1); y < index.y + size.y; y++)
@@ -270,7 +270,7 @@ public class GridSystem : MonoBehaviour
     }
     public bool CanPlaceBlock(Vector2 pos, Vector2 objCellSize)
     {
-        //ºí·°À» ³õÀ» ÀÚ¸®¿¡ ÀÌ¹Ì ¹«¾ð°¡°¡ ÀÖ´ÂÁö È®ÀÎÇÏ´Â ÇÔ¼öÀÔ´Ï´Ù
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ð°¡°ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½
         for (int x = 0; x < objCellSize.x; x++)
         {
             for (int y = 0; y < objCellSize.y; y++)
@@ -305,7 +305,7 @@ public class GridSystem : MonoBehaviour
     {
 
         List<CellViewer> objlist = new List<CellViewer>();
-        //ºí·°ÀÌ ³õ¾ÆÁú À§Ä¡¸¦ ¹Ì¸® º¸¿©ÁÖ´Â ÇÔ¼ö
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ô¼ï¿½
         for (int x = -1; x <= objCellSize.x; x++)
         {
             for (int y = -1; y <= objCellSize.y; y++)

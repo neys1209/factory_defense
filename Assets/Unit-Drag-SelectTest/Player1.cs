@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
-    
     private int Hp;
 
     public int _HP
@@ -27,6 +25,4 @@ public class Enemy : MonoBehaviour
 
     }
     public int Damage { get; set; }
-    
-
 }

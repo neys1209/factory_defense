@@ -67,9 +67,6 @@ public class EnemyAI : Enemy
                 
                 agent.isStopped = false;
                 agent.SetDestination(target.transform.position);
-              //  agent.SetDestination(path.corners[path.corners.Length -1]);
-                //Vector3 dir = new Vector3(agent.steeringTarget.x, transform.position.y, agent.steeringTarget.z) - transform.position;
-                //transform.forward += dir;
 
             }
 
@@ -88,10 +85,10 @@ public class EnemyAI : Enemy
                     shortDis = Vector3.Distance(transform.position, enemyColliders[0].transform.position); // 첫번째를 기준으로 잡아주기 
                   //  NavMeshPath path = new NavMeshPath();
                       target = enemyColliders[0].gameObject;
-                   //   bool p = agent.CalculatePath(enemyColliders[0].transform.position, path);
+                    //   bool p = agent.CalculatePath(enemyColliders[0].transform.position, path);
                     for (int i = 0; i < numColliders; i++)
                     {
-                        float Distance = Vector3.Distance(transform.position , enemyColliders[i].transform.position);
+                        float Distance = Vector3.Distance(transform.position, enemyColliders[i].transform.position);
 
 
                         if (Distance < shortDis)
@@ -99,126 +96,7 @@ public class EnemyAI : Enemy
                             target = enemyColliders[i].gameObject;
                             shortDis = Distance;
                         }
-
-                        //    agent.CalculatePath(enemyColliders[i].transform.position, path);
-                        //if (path.status == NavMeshPathStatus.PathInvalid)
-                        //{
-                        //    agent.ResetPath();
-                        //}
-
-                        //if (path.status != NavMeshPathStatus.PathInvalid)
-                        //{
-                        //    if (path.status != NavMeshPathStatus.PathPartial)
-                        //    {
-                        //        if (Distance < shortDis)
-                        //        {
-                        //           // agent.CalculatePath(enemyColliders[i].transform.position, path);
-                        //            //if (path.status != NavMeshPathStatus.PathInvalid)
-                        //            //{
-                        //            //    if (path.status != NavMeshPathStatus.PathPartial)
-                        //            //    {   
-                                   
-                        //            target = enemyColliders[i].gameObject;
-                        //            shortDis = Distance;
-                        //            //    }
-                        //            //}
-                        //        }
-
-                        //    }
-                        //}
-                      //  NavMeshPath path = new NavMeshPath();
-                      //  bool  p = agent.CalculatePath(enemyColliders[i].transform.position, path);
-                       
-                        //if(agent.CalculatePath(enemyColliders[i].transform.position, path))
-                        // {
-                        //    continue;
-                        ////     Debug.Log(i);
-                        ////     Debug.Log(p);
-
-                        // }
-                        //if (path.status == NavMeshPathStatus.PathComplete)
-                        //{
-                        //   // agent.CalculatePath(enemyColliders[i].transform.position, path);
-                        //    // 목적지 도달 가능
-                        //    Debug.Log(target.name);
-                        //    print("목적지 도달 가능");
-                        //    target = enemyColliders[i].gameObject;
-
-                        //    // 경로 설정                            
-                        //   // agent.SetPath(path);
-
-                           
-                        //}
-
-                        //else if (path.status == NavMeshPathStatus.PathPartial)
-                        //{
-                        //    agent.enabled = false;
-                        //    // 목적지 인근 도달 가능
-                        //    Debug.Log(target.name);
-                        //    print("목적지 인근 도달 가능");
-                        //    break;
-                        //    // agent.ResetPath();
-                        //}
-
-                        //else if (path.status == NavMeshPathStatus.PathInvalid)
-                        //{
-                        //    agent.enabled = false;
-                        //    // 목적지 도달 불가 : hasFoundPath 가 false 
-                        //    Debug.Log(target.name);
-                        //    print("목적지 도달 불가");
-
-                        //    // 경로 재설정
-                        //    break;
-                        //   // agent.ResetPath();
-                            
-                        //}
-
-                        //if (Distance < shortDis )
-                        //{
-                        //    //agent.CalculatePath(enemyColliders[i].transform.position, path);
-                        //    //if (path.status != NavMeshPathStatus.PathInvalid)
-                        //    //{
-                        //    //    if (path.status != NavMeshPathStatus.PathPartial)
-                        //    //    {
-                        //            target = enemyColliders[i].gameObject;
-                        //            shortDis = Distance;
-                        //    //    }
-                        //    //}
-                        //}
                     }
-                    //if (path.status == NavMeshPathStatus.PathComplete)
-                    //{
-                    //    hasTarget = true;
-                    //    // 목적지 도달 가능
-                    //    Debug.Log(target.name);
-                    //    print("목적지 도달 가능");
-
-                    //    // 경로 설정
-
-                    //    agent.SetPath(path);
-                    //}
-
-                    //else if (path.status == NavMeshPathStatus.PathPartial)
-                    //{
-                    //    agent.enabled = false;
-                    //    // 목적지 인근 도달 가능
-                    //    Debug.Log(target.name);
-                    //    print("목적지 인근 도달 가능");
-                    //}
-
-                    //else if (path.status == NavMeshPathStatus.PathInvalid)
-                    //{
-                    //    agent.enabled = false;
-                    //    // 목적지 도달 불가 : hasFoundPath 가 false 
-                    //    Debug.Log(target.name);
-                    //    print("목적지 도달 불가");                       
-
-                    //    // 경로 재설정
-
-                    //    agent.ResetPath();
-                    //}
-                 //  bool p = agent.CalculatePath(target.transform.position, path);
-
                     hasTarget = true;
                 }
                 else
@@ -358,94 +236,46 @@ public class EnemyAI : Enemy
         {
             _HP -= 50;
 
-            if(_HP == 0)
-            Destroy(gameObject);
+            if (_HP == 0) StartCoroutine(Dead());
+                            
         }
     }
 
+
+    IEnumerator Dead()
+    {
+        dead = true;
+        myAnim.SetTrigger("OnDead");
+        yield return new WaitForSeconds(3.0f);
+        Destroy(gameObject);
+    }
+
+
     void Update()
     {
-       
-
-        /*
-        float fb = Vector3.Dot(transform.forward, _enemy.transform.position - transform.position);
-
-        if (fb > 0)
-        {
-            Debug.Log("전방에 적 발견");
-        }
-        else if (fb < 0)
-        {
-            Debug.Log("후방에 적 발견");
-        }
-        */
-
-        //  EnemyState(enemyState);                 
-        //Vector3 dir = new Vector3(agent.steeringTarget.x, transform.position.y, agent.steeringTarget.z) - transform.position;
-        //transform.forward = dir;
-
-        //RaycastHit hit;
-        //if (Physics.Raycast(transform.position + new Vector3(0, 1f, 0), transform.forward, out hit, 5f))
-        //{
-        //    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        //    {
-        //        Debug.DrawLine(transform.position + new Vector3(0, 1f, 0), hit.point);
-        //        isFire = false;
-        //    }
-        //}
-        //else
-        //{
-        //    isFire = true;
-        //}
-        //if (target != null && isFire)
-        //{
-        //    if (Vector3.Distance(transform.position , target.transform.position) <= 10f)
-        //    {
-        //        agent.isStopped = true;
-
-        //        if (Time.time >= shotTime)
-        //        {
-        //            GameObject bullet = Instantiate(bulletShot, bulletSpawn.position, Quaternion.identity);
-        //            //clone.GetComponentInChildren<Tower>().Setup(tiles, gridPositionList);
-        //            bullet.GetComponent<Beam>().Target(target);
-        //            shotTime = Time.time + timeBetweenShots;
-        //            enemyShooter.HP -= 10;
-        //            if (enemyShooter.HP == 0)
-        //            {
-        //                Destroy(gameObject);
-        //            }
-        //        }
-        //    }
-        //}
-        //else
-        //{            
-        //    hasTarget = false;
-        //}
-
-
-
         if (target != null )
         {
             if (Vector3.Distance(transform.position, target.transform.position) <= 10f)
             {
                 agent.isStopped = true;
-
+                myAnim.SetBool("IsMove", false);
                 if (Time.time >= shotTime)
                 {
                     GameObject bullet = Instantiate(bulletShot, bulletSpawn.position, Quaternion.identity);
                     //clone.GetComponentInChildren<Tower>().Setup(tiles, gridPositionList);
                     bullet.GetComponent<Beam>().Target(target);
                     shotTime = Time.time + timeBetweenShots;
-                    //_HP -= 50;
-                    //if (_HP == 0)
-                    //{
-                    //    Destroy(gameObject);
-                    //}
+
                 }
+            }
+            else
+            {
+                myAnim.SetBool("IsMove", true);
             }
         }
         else
         {
+            myAnim.SetBool("IsMove", false);
             hasTarget = false;
         }
 

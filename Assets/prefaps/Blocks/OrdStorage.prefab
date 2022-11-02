@@ -106,7 +106,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_Name
-      value: Storage
+      value: OrdStorage
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_RootOrder
@@ -118,7 +118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -216,7 +216,6 @@ MonoBehaviour:
   TeamCode: 0
   CellSize: {x: 3, y: 3}
   blockType: 5
-  prefab: {fileID: 0}
   Inventory: []
   OnCell: []
   Activate: 0

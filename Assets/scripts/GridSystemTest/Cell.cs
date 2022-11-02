@@ -11,6 +11,7 @@ public class Cell
     public Vector2 GridSpacePostion = new Vector2();
     public bool isEmpty = true;
     GameObject data;
+    GameObject myResource;
     Block blockData;
 
     public Resource.Type OnResourcetype = Resource.Type.Air;
@@ -21,6 +22,12 @@ public class Cell
         blockData = obj.GetComponent<Block>();
         isEmpty = false;
         GridSystem.ActivatedCell.Add(((int)GridSpacePostion.x, (int)GridSpacePostion.y));
+
+        if (blockData.blockType != Block.Type.Drill)
+        {
+            myResource?.SetActive(false);
+        }
+            
     }
 
     public GameObject GetData()
@@ -38,9 +45,11 @@ public class Cell
         {
             GameObject obj = GameObject.Instantiate(ResourceList.Inst.dictionary[OnResourcetype]);
             obj.transform.position = GridSystem.Inst.MapPosition2WorldPostion(GridSpacePostion) + GridSystem.Inst.Offset;
-            obj.transform.localScale = obj.transform.localScale * 1.3f;
+            obj.transform.localScale = obj.transform.localScale * 1.3f * Random.Range(10,15)*0.1f;
+            obj.transform.Rotate(Vector3.up * 90.0f * Random.Range(0, 4));
             obj.transform.Translate(Vector3.down * 0.5f);
             obj.transform.parent = GridSystem.Inst.transform;
+            myResource = obj;
         }
     }
 
@@ -51,6 +60,8 @@ public class Cell
             blockData = null;
             isEmpty = true;
             GridSystem.ActivatedCell.Remove(((int)GridSpacePostion.x, (int)GridSpacePostion.y));
-        }
+            myResource?.SetActive(true);
+        }    
+        
     }
 }

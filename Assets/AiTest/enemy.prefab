@@ -1928,7 +1928,7 @@ GameObject:
   - component: {fileID: 8491882322537415388}
   - component: {fileID: 8491882322537415391}
   m_Layer: 13
-  m_Name: PBRCharacter
+  m_Name: enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2039,7 +2039,7 @@ MonoBehaviour:
   bulletShot: {fileID: 7555373297091019185, guid: 1a5666e00076f3a4c9b190c60ce32405, type: 3}
   layerMask:
     serializedVersion: 2
-    m_Bits: 11392
+    m_Bits: 15488
   layerMask2:
     serializedVersion: 2
     m_Bits: 128

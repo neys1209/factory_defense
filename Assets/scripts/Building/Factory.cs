@@ -82,6 +82,7 @@ namespace FDBlock
                     GameObject obj = Instantiate(myData.ReturnResource, transform.position, Quaternion.identity, ResourceList.Inst.transform) as GameObject;
                     obj.SetActive(false);
                     InputInventory(obj.GetComponent<Resource>());
+                    EffectMenager.Inst.EffectPlay(EffectMenager.EffectType.Smoke, transform.position + Vector3.up);
                 }
                 timer = myData.Deley;
             }

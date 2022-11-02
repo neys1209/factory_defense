@@ -50,7 +50,12 @@ namespace FDBlock
                         InputInventory(obj.GetComponent<Resource>());
                     }
                     if (timer == deley)
+                    {
                         myDrill.Dig();
+                        EffectMenager.Inst.EffectPlay(EffectMenager.EffectType.Drill, transform.position + Vector3.down);
+                    }
+                        
+                    
                 }
             }
         }

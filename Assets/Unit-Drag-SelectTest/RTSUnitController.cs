@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class RTSUnitController : MonoBehaviour
 {
+
+	public static RTSUnitController Inst;
 	[SerializeField]
 	private	UnitSpawner			 unitSpawner;
 	private	List<UnitController> selectedUnitList;				// 플레이어가 클릭 or 드래그로 선택한 유닛
-	public	List<UnitController> UnitList { private set; get; }	// 맵에 존재하는 모든 유닛
-
+	public	List<UnitController> UnitList { private set; get; } // 맵에 존재하는 모든 유닛
+	[SerializeField] List<UnitController> unitlistforcheck;
 	private void Awake()
 	{
+		Inst = this;
 		selectedUnitList = new List<UnitController>();
 		UnitList		 = unitSpawner.SpawnUnits();
+		unitlistforcheck = UnitList;
 	}
 
 	/// <summary>
@@ -19,6 +23,7 @@ public class RTSUnitController : MonoBehaviour
 	/// </summary>
 	public void ClickSelectUnit(UnitController newUnit)
 	{
+
 		// 기존에 선택되어 있는 모든 유닛 해제
 		DeselectAll();
 
@@ -59,7 +64,7 @@ public class RTSUnitController : MonoBehaviour
 	/// </summary>
 	public void MoveSelectedUnits(Vector3 end)
 	{
-		for ( int i = 0; i < selectedUnitList.Count; ++ i )
+		for ( int i = 0; i < selectedUnitList.Count; ++i )
 		{
 			selectedUnitList[i].MoveTo(end);
 		}
@@ -98,6 +103,13 @@ public class RTSUnitController : MonoBehaviour
 		newUnit.DeselectUnit();
 		// 선택한 유닛 정보를 리스트에서 삭제
 		selectedUnitList.Remove(newUnit);
+	}
+
+	public void DestroyUnit(UnitController unit)
+    {
+		selectedUnitList.Remove(unit);
+		UnitList.Remove(unit);
+		Destroy(unit.gameObject);
 	}
 }
 

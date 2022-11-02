@@ -11,9 +11,9 @@ namespace FDBlock
     [System.Serializable]
     public class Block : MonoBehaviour
     {
-        #region ����
+        #region 변수
         public int TeamCode = 0;
-        public enum Type { None, Turret, Factory, Wall, Conveyor, Storage, Drill }
+        public enum Type { None, Turret, Factory, Wall, Conveyor, Storage, Drill,EnemyBase }
         public Vector2 CellSize = new Vector2(1, 1);
         public Type blockType = Type.None;
         //public GameObject prefab;
@@ -32,7 +32,7 @@ namespace FDBlock
         [HideInInspector] public List<Cell> OnCell = new List<Cell>();
 
         [HideInInspector] public bool Activate = false;
-
+        public bool Unbreakable = false;
         #endregion
 
         private void Start()
@@ -50,6 +50,7 @@ namespace FDBlock
             yield return new WaitForSeconds(2);
             GetComponent<Rigidbody>().isKinematic = true;
             Activate = true;
+            EffectMenager.Inst.EffectPlay(EffectMenager.EffectType.Put, transform.position);
         }
 
         public void BlockRotate(int angle, bool real=true)

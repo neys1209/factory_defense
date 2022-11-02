@@ -11,21 +11,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Temple Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.745089
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4999984
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -30.17834
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7b8a2ecb48dcdc7468af483492d0d8a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -114,4 +118,7 @@ MonoBehaviour:
   TeamCode: 0
   CellSize: {x: 3, y: 3}
   blockType: 2
-  prefab: {fileID: 1117848466928983458}
+  Inventory: []
+  OnCell: []
+  Activate: 0
+  Unbreakable: 0

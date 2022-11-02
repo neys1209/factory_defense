@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8375367450921042692}
   - component: {fileID: 7528366190059788581}
   - component: {fileID: 2253117704344146642}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CoalCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,9 +115,10 @@ MonoBehaviour:
   TeamCode: 0
   CellSize: {x: 1, y: 1}
   blockType: 2
-  prefab: {fileID: 0}
   Inventory: []
   OnCell: []
+  Activate: 0
+  Unbreakable: 0
   myData: {fileID: 11400000, guid: c130f2dcf3de152408b2818b62555eea, type: 2}
 --- !u!54 &2253117704344146642
 Rigidbody:

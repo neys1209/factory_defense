@@ -8,7 +8,7 @@ public class GridProcessor : MonoBehaviour
     
     public void Processing() //�Ⱦ�
     {
-        {
+            /*
             Cell cell = GridSystem.Inst.getCellData(Index.x, Index.y);
             if (cell == null) continue;
 
@@ -23,9 +23,8 @@ public class GridProcessor : MonoBehaviour
                 case Block.Type.Conveyor:
                     break;
             }
+            */
         }
-    public void Processing()
-    {
     void Update()
     {
         

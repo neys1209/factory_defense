@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2284778278799393591}
   - component: {fileID: 561209250336337973}
   - component: {fileID: 5493219566405546204}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SandCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,10 +115,10 @@ MonoBehaviour:
   TeamCode: 0
   CellSize: {x: 1, y: 1}
   blockType: 2
-  prefab: {fileID: 0}
   Inventory: []
   OnCell: []
   Activate: 0
+  Unbreakable: 0
   myData: {fileID: 11400000, guid: 2811ead887d0db24abb0b5aac8d9ef28, type: 2}
 --- !u!54 &5493219566405546204
 Rigidbody:

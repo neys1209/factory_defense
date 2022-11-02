@@ -36,8 +36,8 @@ public class UnitController : Player1
 
     public void MoveTo(Vector3 end)
     {
-       // navMeshAgent.SetDestination(end);
-        StartCoroutine(SearchEnemy());
+        navMeshAgent.SetDestination(end);
+        //StartCoroutine(SearchEnemy());
     }
 
     
@@ -74,6 +74,7 @@ public class UnitController : Player1
             {
 
                 navMeshAgent.isStopped = false;
+                
                 navMeshAgent.SetDestination(target.transform.position);
                 //  agent.SetDestination(path.corners[path.corners.Length -1]);
                 //Vector3 dir = new Vector3(agent.steeringTarget.x, transform.position.y, agent.steeringTarget.z) - transform.position;
@@ -86,6 +87,7 @@ public class UnitController : Player1
 
                    navMeshAgent.enabled = true;
                    navMeshAgent.isStopped = true;
+                
 
                 enemyColliders = new Collider[maxColliders];
                 int numColliders = Physics.OverlapSphereNonAlloc(transform.position, Mathf.Infinity, enemyColliders, layerMask);
@@ -136,8 +138,8 @@ public class UnitController : Player1
         {
             _HP -= 50;
 
-            if (_HP == 0)
-                Destroy(gameObject);
+            if (_HP <= 0)
+                RTSUnitController.Inst.DestroyUnit(this);
         }
     }
 
@@ -150,6 +152,7 @@ public class UnitController : Player1
             if (Vector3.Distance(transform.position, target.transform.position) <= 10f)
             {
                 navMeshAgent.isStopped = true;
+                myAnim.SetBool("IsMove", false);
 
                 if (Time.time >= shotTime)
                 {
@@ -162,6 +165,10 @@ public class UnitController : Player1
                     //    Destroy(gameObject);
                     //}
                 }
+            }
+            else
+            {
+                myAnim.SetBool("IsMove", true);
             }
         }
         else

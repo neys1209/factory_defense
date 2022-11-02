@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6380547460051010931}
   - component: {fileID: 1152717519411674523}
   - component: {fileID: 7008247163492553412}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Divider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
   Inventory: []
   OnCell: []
   Activate: 0
+  Unbreakable: 0
   myMod: 1
   filterType: 0
 --- !u!54 &1152717519411674523

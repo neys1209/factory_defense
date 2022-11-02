@@ -12,6 +12,7 @@ public class setCurrentBlockUI: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         GetComponent<Button>().onClick.AddListener(OnButtonClick);
         GameObject obj = Instantiate(Blocks.Inst.BlockList[Number]);
         obj.GetComponent<Rigidbody>().isKinematic = true;

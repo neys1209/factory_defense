@@ -6,7 +6,7 @@ using FDBlock;
 
 public class GridSystem : MonoBehaviour
 {
-    #region ����
+    #region 변수
     public const int MapWidth = 80;
     public const int MapHeight = 80;
     
@@ -27,7 +27,12 @@ public class GridSystem : MonoBehaviour
     public Vector2 lastPlaceOffset { get => _lastPlaceOffset; }
 
     public Vector3 Offset = new Vector3(CellSize.x * 0.5f, 0, CellSize.y * 0.5f);
+
+    public bool GameStart = false;
+    
     #endregion
+
+
 
     private void Awake()
     {
@@ -38,14 +43,17 @@ public class GridSystem : MonoBehaviour
             {
                 MapData[x, y] = new Cell();
                 MapData[x, y].GridSpacePostion = new Vector2(x, y);
-                if (UnityEngine.Random.Range(0, 100) < 3)
-                    MapData[x, y].OnResourcetype = Resource.Type.Coal;
             }
         }
         CellSize = new Vector2(transform.localScale.x / MapWidth, transform.localScale.z / MapHeight);
+        InputResourceInMap(Resource.Type.Sand, -1, -1, 10, 10);
+        InputResourceInMap(Resource.Type.Coal,-1,-1,6,2);
+        InputResourceInMap(Resource.Type.Iron, -1, -1, 4, 5);
+        
     }
     void Start()
     {
+        transform.localScale = new Vector3(MapWidth, transform.lossyScale.y,MapHeight);
         for (int x = 0; x < MapWidth; x++)
         {
             for (int y = 0; y < MapHeight; y++)
@@ -53,6 +61,7 @@ public class GridSystem : MonoBehaviour
                 MapData[x, y].Init();
             }
         }
+        GameStart = true;
     }
 
     // Update is called once per frame
@@ -118,7 +127,7 @@ public class GridSystem : MonoBehaviour
         else preview?.SetActive(false);
     }
 
-    #region ��ǥ�躯ȯ �Լ���
+    #region 좌표 변환
     public Vector2 WorldPostion2MapPosition(Vector3 Wp)
     {
         //������ ��ǥ�� �׸������ ��ǥ�� ��ȯ�մϴ�
@@ -149,7 +158,7 @@ public class GridSystem : MonoBehaviour
     }
     #endregion
 
-    #region ���� ���� ���� �Լ���
+    #region 블럭 놓기 관련 함수
     public bool PlaceBlock(GameObject prefab,Vector3 position,Vector2 objCellSize)
     {
         //�׸���� ������ ���� �Լ��Դϴ�
@@ -208,7 +217,7 @@ public class GridSystem : MonoBehaviour
 
     #endregion
 
-    #region ��Ÿ ���/���� �Լ�
+    #region 셀 데이터 가져오기, 기타 등등
     public Cell getCellData(int x, int y)
     {
         //�ε���(�׸��� ��ǥ)�� ���� �� ��ǥ�� �� �����͸� ���ɴϴ�
@@ -258,7 +267,9 @@ public class GridSystem : MonoBehaviour
     {
         //������ �����ϰ� ������ �ִ� �ڸ��� ���� ���ε� ������ �ʱ�ȭ�մϴ�. 
         //������ ���¸� ����� �α��� ������ ��� ���ε�˴ϴ�.
-        obj.GetComponent<Block>()?.DestoryMyself();
+        Block block = obj.GetComponent<Block>();
+        if (block != null && block.Unbreakable) return;
+        block.DestoryMyself();
         DestroyImmediate(obj); //��� �����Լ�
         for (int x = (int)(index.x - size.x + 1); x < index.x + size.x; x++)
         {
@@ -326,4 +337,24 @@ public class GridSystem : MonoBehaviour
         }
     }
     #endregion
+
+    void InputResourceInMap(Resource.Type res,int x = -1,int y = -1,int spread = 1,int frequency=1)
+    {
+        for (int i = 0; i < frequency; i++)
+        {
+            if (x < 0 || y < 0)
+            {
+                x = UnityEngine.Random.Range(0, MapWidth);
+                y = UnityEngine.Random.Range(0, MapHeight);
+            }
+            if (getCellData(x, y) != null && getCellData(x, y).OnResourcetype != res)
+            {
+                getCellData(x, y).OnResourcetype = res;
+                for (int j = 0; j < spread; j++)
+                    InputResourceInMap(res, x + UnityEngine.Random.Range(-1, 1), y + UnityEngine.Random.Range(-1, 1), spread - 1);
+            }
+            x = -1;
+            y = -1;
+        }
+    }
 }

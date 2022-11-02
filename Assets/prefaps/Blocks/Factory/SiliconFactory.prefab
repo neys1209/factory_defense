@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 2031707050254102971}
   - component: {fileID: 4443047896113647553}
   - component: {fileID: 5983948799370846244}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SiliconFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,10 +133,10 @@ MonoBehaviour:
   TeamCode: 0
   CellSize: {x: 2, y: 2}
   blockType: 2
-  prefab: {fileID: 4015273177948617515}
   Inventory: []
   OnCell: []
   Activate: 0
+  Unbreakable: 0
   myData: {fileID: 11400000, guid: b168bfd4a127b074dafac63c1ba7f464, type: 2}
 --- !u!54 &4443047896113647553
 Rigidbody:

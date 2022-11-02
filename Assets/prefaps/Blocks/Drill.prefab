@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4234131972988175118}
   - component: {fileID: 7500896276222055200}
   - component: {fileID: -8815678848190126507}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Drill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,10 +163,10 @@ MonoBehaviour:
   TeamCode: 0
   CellSize: {x: 1, y: 1}
   blockType: 6
-  prefab: {fileID: 3377826371005270702}
   Inventory: []
   OnCell: []
   Activate: 0
+  Unbreakable: 0
   deley: 2
 --- !u!1 &5896634500431010753
 GameObject:
